@@ -1,0 +1,349 @@
+﻿@model DataBVTA.Models.Entities.ExportReport
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Phiếu khám bệnh</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+</head>
+<body>
+    <style type="text/css">
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .tieude {
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .tieumuc {
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        .chimuc {
+        }
+
+        .noidung {
+            font-weight: bold;
+            color: royalblue;
+            padding-left: 0;
+        }
+
+        #container {
+            min-height: 100%;
+            position: relative;
+        }
+
+        #header {
+            padding: 10px;
+        }
+
+        #body {
+            padding: 10px;
+            padding-bottom: 100px; /* Height of the footer */
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0;
+            padding-top: 10px;
+            width: 100%;
+            height: 100px; /* Height of the footer */
+        }
+
+        .row {
+            page-break-inside: avoid;
+        }
+
+        .box {
+            position: absolute;
+            right: 2px;
+            top: -8px;
+        }
+
+        .boxpid {
+            border: 1px solid black;
+        }
+        .boxcls {
+            border: 1px solid black;
+            float: right;
+        }
+    </style>
+    <div class="box text-center">
+        <label class="col-12 m-0" style="font-size:10px;">TA-HSBA-68-V3</label>
+        <div class="boxpid text-center p-1">
+            <img src="@Model.BarCode" alt="barcode" />
+            <br />
+            <span><strong>12345678</strong></span>
+        </div>
+    </div>
+    <div id="container">
+        <div class="row" id="header">
+            <div class="col-12 text-center">
+                <label class="col-12 tieude mb-0">PHIẾU KHÁM BỆNH / MEDICAL RECORD</label>
+                <label class="col-12">PHÒNG KHÁM/CLINIC:</label>
+            </div>
+        </div>
+        <div class="container" id="body">
+            <!-- I. HÀNH CHÍNH/PATIENT INFORMATION -->
+            <div class="row">
+                <div class="col-12 text-left">
+                    <div class="col-12">
+                        <label class="tieumuc">I. HÀNH CHÍNH/PATIENT INFORMATION:</label>
+                    </div>
+                    <div class="col-12 ml-3">
+                        <div class="row justify-content-start">
+                            <label class="col-auto chimuc">1. Họ và tên BN (In hoa)/Patient's name:</label>
+                            <label class="col-auto noidung" style="text-transform:uppercase;">Nguyễn Văn A</label>
+                        </div>
+                    </div>
+                    <div class="col-12 ml-3">
+                        <div class="row justify-content-between">
+                            <div class="col">
+                                <div class="row justify-content-start">
+                                    <label class="col-auto chimuc">2. Ngày sinh/DOB (dd/mm/yyyy):</label>
+                                    <label class="col-auto noidung">19/05/1995</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-start">
+                                    <label class="col-auto chimuc">7. Điện thoại liên hệ/Phone No:</label>
+                                    <label class="col-auto noidung">0975318195</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 ml-3">
+                        <div class="row justify-content-between">
+                            <div class="col">
+                                <div class="row justify-content-start">
+                                    <label class="col-auto chimuc">3. Tuổi/Age:</label>
+                                    <label class="col-auto noidung">30 Tuổi</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-start">
+                                    <label class="col-auto chimuc">4.Giới/Gender:</label>
+                                    <label class="col-auto noidung">Nữ/Female</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-start">
+                                    <label class="col-auto chimuc">5. Quốc tịch/Nationality:</label>
+                                    <label class="col-auto noidung">Việt Nam</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 ml-3">
+                        <div class="row justify-content-start">
+                            <label class="col-auto chimuc">6. Địa chỉ/Address:</label>
+                            <label class="col-auto noidung" style="text-transform:capitalize">Số 108 Hoàng Như Tiếp, phường bồ đề, quận long biên, thành phố hà nội</label>
+                        </div>
+                    </div>
+                    <div class="col-12 ml-3">
+                        <div class="row justify-content-start">
+                            <label class="col-auto chimuc">7. Ngày giờ đến khám/Examination date (dd/mm/yyyy):</label>
+                            <label class="col-auto noidung">07 giờ 00 phút ngày 01/01/2022</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- --------------------------------- -->
+            <!-- II. HỎI BỆNH -->
+            <div class="row">
+                <div class="col-12 text-left">
+                    <div class="col-12">
+                        <label class="tieumuc">II. HỎI BỆNH/MEDICAL INQUIRY:</label>
+                    </div>
+                    <div class="col-12 ml-3">
+                        <div class="row justify-content-start">
+                            <label class="col-auto chimuc">1. Lý do đến khám/Chief complaint:</label>
+                            <label class="col-auto noidung">Đau khớp đầu gối</label>
+                        </div>
+                    </div>
+                    <div class="col-12 ml-3">
+                        <div class="row justify-content-start">
+                            <label class="col-12 chimuc">2. Quá trình bệnh lý/History of present illness:</label>
+                            <label class="col-auto noidung ml-4">Người bệnh đau khớp vai khoảng 1 tháng nay, đau nhiều về đêm, không chấn thương, lan xuống bả vai tría => Đến khám</label>
+                        </div>
+                    </div>
+                    <div class="col-12 ml-3">
+                        <div class="row justify-content-start">
+                            <label class="col-12 chimuc">3. Tiền sử bệnh bản thân/Past medical history:</label>
+                            <label class="col-auto ml-2">+ Thời gian khởi phát:</label>
+                            <label class="col-auto noidung">01 năm 01 tháng</label>
+                        </div>
+                        <div class="row justify-content-start">
+                            <label class="col-auto ml-2">+ Triệu chứng khởi phát:</label>
+                            <label class="col-auto noidung">abc...</label>
+                        </div>
+                        <div class="row justify-content-start">
+                            <label class="col-auto ml-2">+ Chẩn đoán trước đó:</label>
+                            <label class="col-auto noidung">abc...</label>
+                        </div>
+                        <div class="row justify-content-start">
+                            <label class="col-auto ml-2">+ Thuốc điều trị:</label>
+                            <label class="col-auto noidung">abc...</label>
+                        </div>
+                        <div class="row justify-content-start">
+                            <label class="col-auto ml-2">+ Nội khoa:</label>
+                            <label class="col-auto noidung">Viêm gan C đã điều trị</label>
+                        </div>
+                    </div>
+                    <div class="col-12 ml-3">
+                        <div class="row justify-content-start">
+                            <label class="col-12 chimuc">4. Tiền sử gia đình/Family history:</label>
+                            <label class="col-auto noidung ml-4">Bình thường</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- --------------------------------- -->
+            <!-- III. KHÁM LÂM SÀNG -->       
+            <div class="row">
+                <div class="col-12 text-left">
+                    <div class="col-12">
+                        <label class="tieumuc">III. KHÁM LÂM SÀNG/PHYSICAL EXAMINATION:</label>
+                    </div>
+                    <div class="col-12">
+                        <div class="box">
+                            <div class="boxcls w-25 p-2">
+                                <label class="row-cols-12">Mạch/Pulse: 69 lần/phút (bpm)</label>
+                                <label class="row-cols-12">Thân nhiệt/Temp: 36.5 &deg;C</label>
+                                <label class="row-cols-12">Huyết áp/B.P: 127/76 mmHg</label>
+                                <label class="row-cols-12">Nhịp thở/BR: 19 lần/phút (bpm)</label>
+                                <label class="row-cols-12">Chiều cao/Height: 160 cm</label>
+                                <label class="row-cols-12">Cân nặng/Weight: 50 kg</label>
+                                <label class="row-cols-12">BMI: 24.80 Bình thường</label>
+                            </div>
+                        </div>
+                        <label class="col-12 chimuc">1. Lý do đến khám/Chef complaint:</label>
+                        <div class="row justify-content-start">
+                            <label class="col-12 ml-4">+ Bệnh tỉnh, tiếp xúc tốt:</label>
+                            <label class="col-12 ml-4">+ Da niêm mạc: Bình thường:</label>
+                            <label class="col-12 ml-4">+ Tuyến giám: Không to</label>
+                        </div>
+                        <label class="col-12 chimuc">2. Các bộ phận/Review of systems:</label>
+                        <div class="row justify-content-start">
+                            <label class="col-12 ml-4">+ Tim: Nhịp đều</label>
+                            <label class="col-12 ml-4">+ Phổi: Không có rales</label>
+                            <label class="col-12 ml-4">+ Bụng: Bụng mềm, không chướng</label>
+                            <label class="col-12 ml-4">+ Cơ xương khớp:</label>
+                            <label class="col-12 ml-4">- Cơ vai trái co cứng nhẹ, khớp cùng vai đòn</label>
+                            <label class="col-12 ml-4">- Ấn đau gân cơ nhị đầu trên gai</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row justify-content-start">
+                            <label class="col-auto noidung ml-4">+ Triệu chứng lâm sàng:</label>
+                            <label class="col-auto noidung">abc...</label>
+                        </div>
+                        <div class="row justify-content-start">
+                            <label class="col-auto noidung ml-4">+ Chỉ số ASDAS:</label>
+                            <label class="col-auto noidung">abc...</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- --------------------------------- -->
+            <!-- IV. CẬN LÂM SÀNG -->
+            <div class="row">
+                <div class="col-12 text-left">
+                    <div class="col-12">
+                        <label class="tieumuc">IV. CẬN LÂM SÀNG/LABORATỎY TESTING AND IMAGING:</label>
+                    </div>
+                    <div class="col-12">
+                        <label class="col-12">+ XN tại BV TA:</label>
+                        <div class="row justify-content-start">
+                            <label class="col-12 ml-4">+ Bệnh tỉnh, tiếp xúc tốt:</label>
+                            <label class="col-12 ml-4">+ Da niêm mạc: Bình thường:</label>
+                            <label class="col-12 ml-4">+ Tuyến giám: Không to</label>
+                        </div>
+                        <label class="col-12">+ XN ở BV khác:</label>
+                        <div class="row justify-content-start noidung">
+                            <label class="col-12 ml-4">Bilan viêm</label>
+                            <label class="col-12 ml-4">HLA-B27</label>
+                            <label class="col-12 ml-4">Viêm khớp CC trên X-ray: Có/không</label>
+                            <label class="col-12 ml-4">Viêm khớp CC trên MRÍ: Có/không</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- --------------------------------- -->
+            <!-- V. CHẨN ĐOÁN -->
+            <div class="row">
+                <div class="col-12 text-left">
+                    <div class="col-12">
+                        <label class="col-auto tieumuc">V. CHẨN ĐOÁN (Mã ICD-10)/ DIAGNOSIS (ICD-10 Code):</label>
+                        <label class="col-auto noidung">Viêm khớp không đặc hiệu (M13.9);</label>
+                    </div>
+                </div>
+            </div>
+            <!-- --------------------------------- -->
+            <!-- VI. HƯỚNG XỬ TRÍ -->
+            <div class="row">
+                <div class="col-12 text-left">
+                    <div class="col-12">
+                        <label class="col-auto tieumuc">VI. HƯỚNG XỬ TRÍ/ TREATMENT:</label>
+                        <label class="col-auto noidung">Tư vấn và kê đơn</label>
+                    </div>
+                </div>
+            </div>
+            <!-- --------------------------------- -->
+            <div class="row">
+                <div class="col-12 text-left">
+                    <div class="col-12">
+                        <label class="col-auto">Ghi chú: Đến khám lại ngay khi có dấu hiệu bất thường/ Note: Visit hospital immediately if you have any abnormal signs</label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-4 text-center">
+                    <label class="col-12">Ngày 17 tháng 10 năm 2022/Date: 10/17/2022</label>
+                    <label class="col-12"><strong>BÁC SĨ KHÁM BỆNH/DOCTOR</strong></label>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <label class="col-12"><strong>BSCKI. NGUYỄN THỊ KIM LOAN</strong></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="footer">
+        <div class="col-12 text-left">
+            <div class="col-12">
+                <label class="col-auto">
+                    <i>
+                        1.Quý Khách hàng vui lòng đặt hẹn trước khi tái khám- Số tổng đài đặt hẹn: 18006858/ Please make an appointment fornext examination via phone number: 18006858
+                        <br />
+                        2. Nếu có thay đổi thông tin (số điện thoại, địa chỉ,...) xin quý khách vui lòng thông báo lại cho Bệnh viện qua bộ phận Chăm sóc Khách hàng/
+                    </i>
+                </label>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

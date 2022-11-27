@@ -1,0 +1,207 @@
+﻿@model DataBVTA.Models.ViewModels.ThongTinBenhNhanVM
+@{
+    ViewData["Title"] = "Chỉ định dịch vụ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .btn {
+        display: unset;
+    }
+
+    .nav-sidebar .nav-item > .nav-link {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .nav-sidebar .nav-item:hover {
+        background-color: transparent;
+    }
+
+    .dataTables_filter{
+        display:none;
+    }
+
+    tr.group {
+        background-color: #49a0de !important;
+        color:white;
+        text-transform:uppercase;
+    }
+
+    .card {
+        border-radius: unset;
+    }
+</style>
+
+<ul class="nav nav-tabs pl-5" id="custom-content-above-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="tab-PhieuKhamBenh" data-toggle="pill" href="#content-PhieuKhamBenh" role="tab" aria-controls="content-PhieuKhamBenh" aria-selected="true">Phiếu khám</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="tab-BieuDo" data-toggle="pill" href="#content-BieuDo" role="tab" aria-controls="content-BieuDo" aria-selected="false">Biểu đồ</a>
+    </li>
+</ul>
+<div class="tab-content pl-3 pr-3" id="custom-content-below-tabContent">
+    <div class="tab-pane fade show active" id="content-PhieuKhamBenh" role="tabpanel" aria-labelledby="content-PhieuKhamBenh">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    @await Component.InvokeAsync("ThongTinHanhChinh", new {mabn = Model.mabn})
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-3 pr-0">
+                            @await Component.InvokeAsync("DanhMuc", new {mabn = Model.mabn})
+                        </div>
+                        <div class="col-9 pl-0">
+                            <!-- /.row -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <form id="myForm" method="post" asp-area="" asp-action="KhamLamSang" asp-controller="CoXuongKhop">
+                                        <div class="card mb-0 ml-0 box-shadow-disable">
+                                            <div class="card-header">
+                                                <h3 class="card-title head-text">Chỉ định</h3>
+                                                <div class="card-tools">
+                                                    <a type="button" class="btn btn-info btn-sm mr-2" href="@Url.Action("ThemMoiChiDinh","CoXuongKhop")"><i class="fas fa-plus"></i> Tạo chỉ định</a>
+                                                    <button type="button" class="btn btn-success btn-sm mr-2"><i class="fas fa-print"></i> In chỉ định</button>
+                                                    <button type="button" class="btn btn-danger btn-sm mr-2"><i class="fas fa-trash-alt"></i> Xóa chỉ định</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body" style="min-height:305px">
+                                                @*<input type="hidden" id="id" name="id" value="@Model.BenhNhan.id" />*@
+                                                <table class="table table-bordered text-nowrap" style="width: 100%" id="tableChiDinh">
+                                                    <thead class="thead">
+                                                        <tr>
+                                                            <th class="text-center w-auto text-nowrap noOrder"><input type="checkbox" class="selectAll" id="selectAll" name="selectAll" value="all"></th>
+                                                            <th class="w-auto text-nowrap">Dịch vụ</th>
+                                                            <th class="w-auto text-nowrap">Số lượng</th>
+                                                            <th class="w-auto text-nowrap">Ngày chỉ định</th>
+                                                            <th class="w-auto text-nowrap">Ngày lấy mẫu</th>
+                                                            <th class="w-auto text-nowrap">Kết quả</th>
+                                                            <th class="w-auto text-nowrap">Chi tiết</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="text-wrap">183</td>
+                                                            <td class="text-wrap">Chẩn đoán hình ảnh</td>
+                                                            <td class="text-wrap">11-7-2014</td>
+                                                            <td class="text-wrap"><span class="tag tag-success">Approved</span></td>
+                                                            <td class="text-wrap">Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                            <td class="text-wrap"><a class="btn btn-link btn-sm" data-toggle="ajax-modal" data-target="#phongkhamCXK-3" data-url="/CoXuongKhop/KetQuaChanDoanHinhAnh">Kết quả</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-wrap"></td>
+                                                            <td class="text-wrap">219</td>
+                                                            <td class="text-wrap">Xét nghiệm</td>
+                                                            <td class="text-wrap">11-7-2014</td>
+                                                            <td class="text-wrap"><span class="tag tag-warning">Pending</span></td>
+                                                            <td class="text-wrap">Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                            <td class="text-wrap"><a class="btn btn-link btn-sm" data-toggle="ajax-modal" data-target="#phongkhamCXK-3" data-url="/CoXuongKhop/KetQuaXetNghiem">Kết quả</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-wrap"></td>
+                                                            <td class="text-wrap">657</td>
+                                                            <td class="text-wrap">Khám bệnh</td>
+                                                            <td class="text-wrap">11-7-2014</td>
+                                                            <td class="text-wrap"><span class="tag tag-primary">Approved</span></td>
+                                                            <td class="text-wrap">Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                            <td class="text-wrap"><a class="btn btn-link btn-sm" data-toggle="ajax-modal" data-url="" data-target="">Kết quả</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-wrap"></td>
+                                                            <td class="text-wrap">175</td>
+                                                            <td class="text-wrap">Xét nghiệm</td>
+                                                            <td class="text-wrap">11-7-2014</td>
+                                                            <td class="text-wrap"><span class="tag tag-danger">Denied</span></td>
+                                                            <td class="text-wrap">Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                            <td class="text-wrap"><a class="btn btn-link btn-sm" data-toggle="ajax-modal" data-url="" data-target="">Kết quả</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td class="text-wrap">183</td>
+                                                            <td class="text-wrap">Chẩn đoán hình ảnh</td>
+                                                            <td class="text-wrap">11-7-2014</td>
+                                                            <td class="text-wrap"><span class="tag tag-success">Approved</span></td>
+                                                            <td class="text-wrap">Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                            <td class="text-wrap"><a class="btn btn-link btn-sm" data-toggle="ajax-modal" data-target="#phongkhamCXK-3" data-url="/CoXuongKhop/KetQuaChanDoanHinhAnh">Kết quả</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-wrap"></td>
+                                                            <td class="text-wrap">219</td>
+                                                            <td class="text-wrap">Xét nghiệm</td>
+                                                            <td class="text-wrap">11-7-2014</td>
+                                                            <td class="text-wrap"><span class="tag tag-warning">Pending</span></td>
+                                                            <td class="text-wrap">Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                            <td class="text-wrap"><a class="btn btn-link btn-sm" data-toggle="ajax-modal" data-target="#phongkhamCXK-3" data-url="/CoXuongKhop/KetQuaXetNghiem">Kết quả</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-wrap"></td>
+                                                            <td class="text-wrap">657</td>
+                                                            <td class="text-wrap">Khám bệnh</td>
+                                                            <td class="text-wrap">11-7-2014</td>
+                                                            <td class="text-wrap"><span class="tag tag-primary">Approved</span></td>
+                                                            <td class="text-wrap">Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                            <td class="text-wrap"><a class="btn btn-link btn-sm" data-toggle="ajax-modal" data-url="" data-target="">Kết quả</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-wrap"></td>
+                                                            <td class="text-wrap">175</td>
+                                                            <td class="text-wrap">Xét nghiệm</td>
+                                                            <td class="text-wrap">11-7-2014</td>
+                                                            <td class="text-wrap"><span class="tag tag-danger">Denied</span></td>
+                                                            <td class="text-wrap">Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                                            <td class="text-wrap"><a class="btn btn-link btn-sm" data-toggle="ajax-modal" data-target="#phongkhamCXK-3" data-url="/CoXuongKhop/KetQuaXetNghiem">Kết quả</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                    </form>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="content-BieuDo" role="tabpanel" aria-labelledby="content-BieuDo">
+        @await Html.PartialAsync("_BieuDo")
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('body').on('click', 'a[data-toggle="ajax-modal"]', function (event) {
+                var url = $(this).data('url');
+                $(this).callModal(url);
+            });
+        });
+        var table = $('#tableChiDinh').callDataTable_Checkbox_RowGrouping(2,6)
+        // Order by the grouping
+        $('#tableChiDinh tbody').on('click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
+                table.order([groupColumn, 'desc']).draw();
+            } else {
+                table.order([groupColumn, 'asc']).draw();
+            }
+        });
+        $('.selectAll').on("click", function (e) {
+            if ($(this).is(":checked")) {
+                table.rows().select();
+            } else {
+                table.rows().deselect();
+            }
+        });
+    </script>
+}
+
+

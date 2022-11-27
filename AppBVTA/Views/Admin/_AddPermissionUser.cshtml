@@ -1,0 +1,118 @@
+﻿
+@model DataBVTA.Models.ViewModels.PermissionViewModel
+@{
+    Layout = null;
+}
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="userRoleLabel" aria-hidden="true" id="UserPermissionPopup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Phân quyền theo nhóm quyền</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;&nbsp;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-2"><label class="col-form-label">Controller:</label></div>
+                    <div class="col">
+                        <select class="form-control controller-list" id="ControllerID2" name="ControllerID"></select>
+                    </div>
+                </div>
+
+                <form method="post" asp-controller="Admin" asp-action="AddPermissionUser" id="userPermissionForm">
+                    <table class="table table-bordered table-striped dataTable dtr-inline" width="100%" role="grid" id="tableUserPermission">
+                        <thead>
+                            <tr>
+                                <th class="text-warp w-auto">Tên vai trò</th>
+                                <th class="text-warp w-auto">Mô tả</th>
+                                <th class="text-warp w-auto">Sử dụng</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="modal-footer">
+                        <input type="hidden" id="UserID" name="UserID" value="@Model.User.UserID" />
+                        <input type="hidden" id="UserName" name="UserName" value="@Model.User.UserName" />
+                        <input type="hidden" id="count" name="count" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" data-save="modal">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var userName = ((document.getElementById("UserName") || {}).value) || "";
+    var columnMenu = [
+        { "data": "name" },
+        { "data": "area" },
+        {
+            "data": { menuID: "menuID", name: "name", checked: "checked" },
+            "render": function (data, title, row, meta) {
+                if (data.checked) {
+                    var inputCheckbox = '<input type="checkbox" class="form-check-input" id="NavigationMenuName-' + meta.row + '" name="NavigationMenuName-' + meta.row + '" value="' + data.name + '" checked>';
+                }
+                else {
+                    var inputCheckbox = '<input type="checkbox" class="form-check-input" id="NavigationMenuName-' + meta.row + '" name="NavigationMenuName-' + meta.row + '" value="' + data.name + '">';
+                }
+                return '<input type="hidden" id="NavigationMenuID-' + meta.row + '" name="NavigationMenuID-' + meta.row + '" value="' + data.menuID + '" /><div class="form-check form-check-inline">' + inputCheckbox + '</div>';
+            },
+            "class": "text-center"
+        },
+        { "data": "controllerID" },
+        //{ "data": "actionID" },
+    ]
+    var table = $(this).callDataTable("#tableUserPermission", columnMenu, "/Admin/GetMenu?UserName=" + userName, 10, "2");
+    table.column(3).visible(false);
+
+    $('#ControllerID2').select2({
+        ajax: {
+            url: '/Admin/GetController',
+            dataType: 'json',
+            data: function (term) {
+                return {
+                    term: term
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: $.map(data.data, function (item) {
+                        return {
+                            text: item.controllerName,
+                            id: item.controllerID
+                        }
+                    })
+                };
+            }
+        },
+        placeholder: 'Chọn để lọc',
+        allowClear: true
+    });
+
+    $('#ControllerID2').on('change keyup', function () {
+        var searchController = $('#ControllerID2').val() || "";
+        table.search(searchController).draw();
+    });
+
+    $('body .modal').on('click', 'button[data-save="modal"]', function () {
+        document.getElementById("count").value = table.rows().count();
+        var data = $('#userPermissionForm').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/Admin/AddPermissionUser',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
+            data: data,
+            success: function (data) {
+                $(this).callToast(data.result, data.title, data.message);
+            },
+            error: function (data) {
+                $(this).callToast(data.result, data.title, data.message);
+            }
+        });
+    });
+    
+</script>

@@ -1,0 +1,271 @@
+﻿
+@{
+    ViewData["Title"] = "ThemMoiChiDinh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .dataTables_filter {
+        display: none;
+    }
+
+    .dataTables_info {
+        display: none;
+    }
+
+    .dataTables_paginate {
+        display: none;
+    }
+    .filters{
+        background-color:whitesmoke;
+    }
+</style>
+<fieldset class="border p-2 m-5">
+    <legend class="col-auto mb-0" style="font-size:14px;">Thêm mới chỉ định</legend>
+    <form method="post" asp-area="" asp-action="" asp-controller="" id="myForm">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group row">
+                    <label for="BacSi" class="col-form-label col-2">Bác sĩ: </label>
+                    <select class="form-control col-8" id="BacSi" name="BacSi">
+                        <option>Tên bác sĩ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group row">
+                            <label for="DoiThuong" class="col-form-label col-auto">Đối tượng: </label>
+                            <select class="form-control col-6" id="DoiThuong" name="DoiThuong">
+                                <option>Thu phí</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group row">
+                            <label for="SoLuong" class="col-form-label col-auto">Số lượng: </label>
+                            <input type="text" class="form-control col-2" id="soLuong" value="1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label class="col-form-label col-auto">Dịch vụ: </label>
+                <label class="col-auto" id="maDichVu" style="color: dodgerblue; font-weight:bold"></label>
+            </div>
+            <div class="col-8">
+                <select class="example form-control">
+                    <option value="0">0001|Tên dịch vụ 1|10000</option>
+                    <option value="1">0002|Tên dịch vụ 2|20000</option>
+                    <option value="2">0003|Tên dịch vụ 3Tên dịch vụ 3Tên dịch vụ 3Tên dịch vụ 3Tên dịch vụ 3Tên dịch vụ 3Tên dịch vụ 3|30000</option>
+                    <option value="3">0004|Tên dịch vụ 4|40000</option>
+                    <option value="4">0005|Tên dịch vụ 5|50000</option>
+                    <option value="5">0006|Tên dịch vụ 6|60000</option>
+                </select>
+                @*<table class="table table-bordered table-hover text-nowrap" id="dichvuTable">
+                    <thead class="thead">
+                        <tr>
+                            <th>Mã</th>
+                            <th>Tên dịch vụ</th>
+                            <th>Giá</th>
+                        </tr>
+                    </thead>
+                </table>*@
+            </div>
+            <div class="col-2">
+                <label class="col-form-label col-auto" id="tongTien" style="color: dodgerblue; font-weight:bold"></label>
+            </div>
+        </div>
+        <div class="form-group row justify-content-between">
+            <div class="col-6">
+                <div class="form-group row mb-2">
+                    <label class="col-form-label col-auto">Ngày thực hiện: </label>
+                    <div class="col-3">
+                        <input type="text" id="ngayThucHien" name="ngayThucHien" class="form-control datetimepicker-input ngayThucHien" data-toggle="datetimepicker" data-target="#ngayThucHien" />
+                    </div>
+                    <div class="col-2">
+                        <input type="text" id="gioThucHien" name="gioThucHien" class="form-control datetimepicker-input gioThucHien" data-toggle="datetimepicker" data-target="#gioThucHien" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-success btn-sm" type="submit">Lưu chỉ định</button>
+            </div>
+        </div>
+    </form>
+</fieldset>
+<fieldset class="border p-2 m-5">
+    <legend class="col-auto mb-0" style="font-size:14px;">Danh sách chỉ định</legend>
+    <table class="table table-bordered table-hover text-nowrap" id="chiDinhTable">
+        <thead class="thead">
+            <tr>
+                <th>Khoa/Phòng</th>
+                <th>Ngày chỉ định</th>
+                <th>Đối tượng</th>
+                <th>Tên chỉ định</th>
+                <th>Người nhập</th>
+                <th>Nhóm chỉ định</th>
+            </tr>
+        </thead>
+    </table>
+</fieldset>
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#ngayThucHien').datetimepicker({ format: 'DD/MM/YYYY', locale: 'vi' });
+            $('#gioThucHien').datetimepicker({ format: 'HH:mm' });
+            $('#SoLuong').inputmask({ alias: 'numeric' });
+        });
+        $(function () {
+            $(".example").select2({
+                placeholder: "Chọn dịch vụ",
+                width: "100%",
+                allowClear: true,
+                templateResult: function (option) {
+                    var item = option.text.split('|');
+                    var ob = jQuery(
+                        '<div class="row justify-content-between">' +
+                        '<div class="col-md-2">' + item[0] + '</div>' +
+                        '<div class="col-md-8 text-wrap">' + item[1] + '</div>' +
+                        '<div class="col-md-2">' + item[2] + '</div>' +
+                        '</div>');
+                    return ob;
+                },
+                templateSelection: function (option) {
+                    var item = option.text.split('|');
+                    return item[1];
+                },
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+
+            //var table = $('#dichvuTable').callDataTable("0,1,2", 10);
+            $(".example").on('propertychange change keyup paste input', function (e) {
+                var item = $(".example").find(":selected").text().split('|');
+                //table.row().remove();
+                //table.row.add([item[0], item[1], item[2]]).draw(false);
+                var soluong = $('#soLuong').val();
+
+                document.getElementById('maDichVu').innerText = item[0];
+                document.getElementById('tongTien').innerText = (soluong * parseInt(item[2])).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });;
+            });
+            $('#soLuong').on('propertychange change keyup paste input', function () {
+                var item = $(".example").find(":selected").text().split('|');
+                var soluong = $('#soLuong').val();
+                document.getElementById('tongTien').innerText = (parseInt(soluong) * parseInt(item[2])).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });;
+            })
+        });
+
+        $(document).ready(function () {
+            // Setup - add a text input to each footer cell
+            $('#chiDinhTable thead tr')
+                .clone(true)
+                .addClass('filters')
+                .appendTo('#chiDinhTable thead');
+
+            var table = $('#chiDinhTable').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+                "orderCellsTop": true,
+                "fixedHeader": false,
+                "initComplete": function () {
+                    var api = this.api();
+
+                    // For each column
+                    api
+                        .columns()
+                        .eq(0)
+                        .each(function (colIdx) {
+                            // Set the header cell to contain the input element
+                            if (colIdx != 5) {
+                                var cell = $('.filters th').eq(
+                                    $(api.column(colIdx).header()).index()
+                                );
+                                var title = $(cell).text();
+                                $(cell).html('<input type="text" class="form-control" placeholder="' + title + '" />');
+                            }
+                            // On every keypress in this input
+                            $(
+                                'input',
+                                $('.filters th').eq($(api.column(colIdx).header()).index())
+                            )
+                                .off('keyup change')
+                                .on('change', function (e) {
+                                    // Get the search value
+                                    $(this).attr('title', $(this).val());
+                                    var regexr = '({search})'; //$(this).parents('th').find('select').val();
+
+                                    var cursorPosition = this.selectionStart;
+                                    // Search the column for that value
+                                    api
+                                        .column(colIdx)
+                                        .search(
+                                            this.value != ''
+                                                ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                                : '',
+                                            this.value != '',
+                                            this.value == ''
+                                        )
+                                        .draw();
+                                })
+                                .on('keyup', function (e) {
+                                    e.stopPropagation();
+
+                                    $(this).trigger('change');
+                                    $(this)
+                                        .focus()[0]
+                                        .setSelectionRange(cursorPosition, cursorPosition);
+                                });
+                        });
+                },
+                "columnDefs": [
+                { "visible": false, "targets": 5 }
+                ],
+                "order": [[5, 'asc']],
+                "language": {
+                    "sProcessing": "Đang tải dữ liệu...",
+                    "sLengthMenu": "Xem _MENU_ mục",
+                    "sZeroRecords": "Không tìm thấy dòng nào phù hợp",
+                    "sInfo": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
+                    "sInfoEmpty": "Đang xem 0 đến 0 trong tổng số 0 mục",
+                    "sInfoFiltered": "(được lọc từ _MAX_ mục)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Tìm:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "Đầu",
+                        "sPrevious": "Trước",
+                        "sNext": "Tiếp",
+                        "sLast": "Cuối"
+                    }
+                },
+                "drawCallback": function (settings) {
+                    var api = this.api();
+                    var rows = api.rows({ page: 'current' }).nodes();
+                    var last = null;
+
+                    api
+                        .column(5, { page: 'current' })
+                        .data()
+                        .each(function (group, i) {
+                            if (last !== group) {
+                                $(rows)
+                                    .eq(i)
+                                    .before('<tr class="group"><td colspan="' + 5 + '">' + group + '</td></tr>');
+
+                                last = group;
+                            }
+                        });
+                },
+            });
+        });
+    </script>
+}

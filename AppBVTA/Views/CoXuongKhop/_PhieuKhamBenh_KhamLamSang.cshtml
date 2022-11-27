@@ -1,0 +1,722 @@
+﻿@model DataBVTA.Models.ViewModels.ThongTinBenhNhanVM
+<!-- /.row -->
+<div class="row">
+    <div class="col-12">
+        <form id="myForm" method="post" asp-area="" asp-action="KhamLamSang" asp-controller="CoXuongKhop">
+            <div class="card mb-0 ml-0">
+                <div class="card-header">
+                    <h3 class="card-title head-text">Khám lâm sàng</h3>
+                    <div class="card-tools">
+                        <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-edit"></i> Cập nhật thông tin</button>
+                        <a class="btn btn-success btn-sm ml-3" href="/Reports/PhieuKhamBenh" target="_blank"><i class="fas fa-print"></i> In phiếu khám</a>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <input type="hidden" id="mabn" name="mabn" value="" />
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="form-group row">
+                                <label for="Mach" class="col-form-label col-auto pl-0 pr-0">Mạch:</label>
+                                <div class="col pl-0 pr-0">
+                                    <input type="text" id="Mach" name="Mach" class="form-control" />
+                                </div>
+                                <label for="Mach" class="col-form-label col-auto pl-0 pr-2">1/p</label>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="form-group row">
+                                <label for="NhietDo" class="col-form-label col-auto pl-0 pr-0">T*:</label>
+                                <div class="col pl-0 pr-0">
+                                    <input type="text" id="NhietDo" name="NhietDo" class="form-control" />
+                                </div>
+                                <label for="NhietDo" class="col-form-label col-auto pl-0">*C</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group row">
+                                <label for="HA" class="col-form-label col-auto pl-0 pr-0">HA:</label>
+                                <div class="col pl-0 pr-0">
+                                    <input type="text" id="HA" name="HA" class="form-control" />
+                                </div>
+                                <label for="HA2" class="col-form-label col-auto pl-0 pr-0">/</label>
+                                <div class="col pl-0">
+                                    <input type="text" id="HA2" name="HA2" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group row">
+                                <label for="NhipTho" class="col-form-label col-auto pl-0 pr-0">Nhịp thở:</label>
+                                <div class="col pl-0 pr-0">
+                                    <input type="text" id="NhipTho" name="NhipTho" class="form-control" />
+                                </div>
+                                <label for="NhipTho" class="col-form-label col-auto pl-0">1/p</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group row">
+                                <label for="ChieuCao" class="col-form-label col-auto pl-0 pr-0">Cao:</label>
+                                <div class="col pl-0 pr-0">
+                                    <input type="text" id="ChieuCao" name="ChieuCao" class="form-control" />
+                                </div>
+                                <label for="ChieuCao" class="col-form-label col-auto pl-0">cm</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group row">
+                                <label for="CanNang" class="col-form-label col-auto pl-0 pr-0">Cân nặng:</label>
+                                <div class="col pl-0 pr-0">
+                                    <input type="text" id="CanNang" name="CanNang" class="form-control" />
+                                </div>
+                                <label for="CanNang" class="col-form-label col-auto pl-0">kg</label>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="form-group row">
+                                <label for="BMI" class="col-form-label col-auto pl-0 pr-0">BMI:</label>
+                                <div class="col pl-0 pr-0">
+                                    <input type="text" id="BMI" name="BMI" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-cols-12">
+                        <div class="form-group">
+                            <label for="lyDoKham">Lý do đến khám</label>
+                            <textarea class="form-control" id="lyDoKham" name="lyDoKham" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="row-cols-12">
+                        <div class="form-group">
+                            <label for="benhSu">1. Bệnh sử</label>
+                            <textarea class="form-control" id="benhSu" name="benhSu" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- #start Tiền sử bệnh -->
+                    <div class="row">
+                        <label class="col-form-label col-12">2. Tiền sử bệnh</label>
+                        <label class="col-form-label col-12">&nbsp;&nbsp;&nbsp; 2.1 Bản thân</label>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label class="col-form-label col-auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus; Thời gian khởi phát:</label>
+                                <div class="col-2">
+                                    <input type="text" id="ThangKP" name="ThangKP" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#ThangKP" />
+                                </div>
+                                <label class="col-form-label col-auto">tháng</label>
+                                <div class="col-2">
+                                    <input type="text" id="NamKP" name="NamKP" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#NamKP" />
+                                </div>
+                                <label class="col-form-label col-auto">năm</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label class="col-form-label col-auto">&minus; Tiền sử:</label>
+                                <div class="col">
+                                    <input type="text" id="TienSu" name="TienSu" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <fieldset class="border p-2">
+                        <legend class="col-auto mb-0" style="font-size:14px;">Triệu chứng khởi phát</legend>
+                        <label class="col-form-label col-auto">&minus; Tại khớp:</label>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="DauLungKieuViemTCKPTK" />
+                                        <label for="DauLungKieuViemTCKPTK">Đau lưng kiểm viêm: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="DauLungKieuViemTCKPTK" name="DauLungKieuViemTCKPTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="DauVungMongTCKPTK" />
+                                        <label for="DauVungMongTCKPTK">Đau vùng mông (khớp cùng chậu): </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="DauVungMongTCKPTK" name="DauVungMongTCKPTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="ViemKhopNgoaiViTCKPTK" />
+                                        <label for="ViemKhopNgoaiViTCKPTK">Viêm khớp ngoại vi: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="ViemKhopNgoaiViTCKPTK" name="ViemKhopNgoaiViTCKPTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="ViemNgonTCKPTK" />
+                                        <label for="ViemNgonTCKPTK">Viêm ngón: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="ViemNgonTCKPTK" name="ViemNgonTCKPTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="ViemDiemBamGamTCKPTK" />
+                                        <label for="ViemDiemBamGamTCKPTK">Viêm điểm bám gân</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="ViemDiemBamGamTCKPTK" name="ViemDiemBamGamTCKPTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="KhacTCKPTK" />
+                                        <label for="KhacTCKPTK">Khác: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="KhacTCKPTK" name="KhacTCKPTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <label class="col-form-label col-auto">&minus; Ngoài khớp:</label>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="VayNenTCKPNK" />
+                                        <label for="VayNenTCKPNK">Vảy nến: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="VayNenTCKPNK" name="VayNenTCKPNK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="TonThuongMongTCKPNK" />
+                                        <label for="TonThuongMongTCKPNK">Tổn thương móng: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="TonThuongMongTCKPNK" name="TonThuongMongTCKPNK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="MatTCKPNK" />
+                                        <label for="MatTCKPNK">Mắt</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="MatTCKPNK" name="MatTCKPNK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="RuotTCKPNK" />
+                                        <label for="RuotTCKPNK">Ruột: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="RuotTCKPNK" name="RuotTCKPNK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="HoHapTCKPNK" />
+                                        <label for="HoHapTCKPNK">Hô hấp</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="HoHapTCKPNK" name="HoHapTCKPNK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="TimMachTCKPNK" />
+                                        <label for="TimMachTCKPNK">Tim mạch: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="TimMachTCKPNK" name="TimMachTCKPNK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group row mb-0">
+                                    <div class="checkbox icheck-belizehole col-2">
+                                        <input type="checkbox" id="KhacTCKPNK" />
+                                        <label for="KhacTCKPNK">Khác: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="KhacTCKPNK" name="KhacTCKPNK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!-- #end Tiền sử bệnh -->
+
+                    <div class="form-group row mt-3">
+                        <label class="col-form-label col-auto ml-2">&minus; Chẩn đoán trước đó:</label>
+                        <div class="col">
+                            <input type="text" id="ChanDoan" name="ChanDoan" class="form-control" />
+                        </div>
+                    </div>
+
+                    <!-- #start Thuốc điều trị -->
+                    <fieldset class="border p-2">
+                        <legend class="col-auto" style="font-size:14px;">Thuốc điều trị</legend>
+                        <div class="form-group row mb-2">
+                            <div class="checkbox icheck-belizehole col-2">
+                                <input type="checkbox" id="NSAIDs" />
+                                <label for="NSAIDs">NSAIDs: </label>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="NSAIDs" name="NSAIDs" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <div class="checkbox icheck-belizehole col-2">
+                                <input type="checkbox" id="Corticoid" />
+                                <label for="Corticoid">Corticoid: </label>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="Corticoid" name="Corticoid" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row mb-2">
+                            <div class="checkbox icheck-belizehole col-2">
+                                <input type="checkbox" id="DMARDs" />
+                                <label for="DMARDs">DMARDs: </label>
+                            </div>
+                            <div class="col">
+                                <input type="text" id="DMARDs" name="DMARDs" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="checkbox icheck-belizehole col-auto">
+                                <input type="checkbox" id="ThuocSinhHoc" />
+                                <label for="ThuocSinhHoc">Thuốc sinh học: </label>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-5 ml-5">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-5">
+                                        <input type="checkbox" id="Infliximab" />
+                                        <label for="Infliximab">Infliximab (Remicade): </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="Infliximab" name="Infliximab" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-5">
+                                        <input type="checkbox" id="Adalimumab" />
+                                        <label for="Adalimumab">Adalimumab (Humira): </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="Adalimumab" name="Adalimumab" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5 ml-5">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-5">
+                                        <input type="checkbox" id="Golimumab" />
+                                        <label for="Golimumab">Golimumab (Simponi): </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="Golimumab" name="Golimumab" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-5">
+                                        <input type="checkbox" id="Secukinumab" />
+                                        <label for="Secukinumab">Secukinumab (Fraizeron): </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="Secukinumab" name="Secukinumab" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group row">
+                                    <div class="checkbox icheck-belizehole col-2">
+                                        <input type="checkbox" id="ThuocKhac" />
+                                        <label for="ThuocKhac">Thuốc khác: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="ThuocKhac" name="ThuocKhac" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="ThuocKhac" class="col-12">Tiền sử dị ứng, kháng thuốc, TDKMM gặp phải với mỗi thuốc trên: </label>
+                            <div class="col-12">
+                                <input type="text" id="ThuocKhac" name="ThuocKhac" class="form-control" />
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!-- #end Thuốc điều trị -->
+
+                    <div class="row">
+                        <label class="col-form-label col-12"><strong>Khám lâm sàng</strong></label>
+                        <div class="col-6">
+                            <label class="col-form-label col-12">1. Toàn thân</label>
+                            <textarea class="form-control col" rows="3"></textarea>
+                        </div>
+                        <div class="col-6">
+                            <label class="col-form-label col-12">2. Các bộ phận</label>
+                            <textarea class="form-control col" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- #start Triệu chứng lâm sàng -->
+                    <fieldset class="border p-2">
+                        <legend class="col-auto mb-0" style="font-size:14px;">Triệu chứng lâm sàng</legend>
+                        <label class="col-form-label col-auto">1. Tại khớp</label>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="DauLungKieuViemTCLSTK" />
+                                        <label for="DauLungKieuViemTCLSTK">Đau lưng kiểm viêm: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="DauLungKieuViemTCLSTK" name="DauLungKieuViemTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="ViemKhopNgoaiViTCLSTK" />
+                                        <label for="ViemKhopNgoaiViTCLSTK">Viêm khớp ngoại vi: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="ViemKhopNgoaiViTCLSTK" name="ViemKhopNgoaiViTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="ViemNgonTCLSTK" />
+                                        <label for="ViemNgonTCLSTK">Viêm ngón: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="ViemNgonTCLSTK" name="ViemNgonTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="ViemDiemBamGanTCLSTK" />
+                                        <label for="ViemDiemBamGanTCLSTK">Viêm điểm bám gân: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="ViemDiemBamGanTCLSTK" name="ViemDiemBamGanTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="KhacTaiKhopTCLSTK" />
+                                        <label for="KhacTaiKhopTCLSTK">Khác:</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="KhacTaiKhopTCLSTK" name="KhacTaiKhopTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+
+                            </div>
+                        </div>
+                        <label class="col-form-label col-auto">2. Ngoài khớp</label>
+                        <label class="col-form-label col-auto">2.1 Liên quan tới VKCS:</label>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="VayNenTCLSTK" />
+                                        <label for="VayNenTCLSTK">Vảy nến: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="VayNenTCLSTK" name="VayNenTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="TonThuongMongTCLSTK" />
+                                        <label for="TonThuongMongTCLSTK">Tổn thương móng: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="TonThuongMongTCLSTK" name="TonThuongMongTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="MatTCLSTK" />
+                                        <label for="MatTCLSTK">Mắt</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="MatTCLSTK" name="MatTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="RuotTCLSTK" />
+                                        <label for="RuotTCLSTK">Ruột: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="RuotTCLSTK" name="RuotTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="HoHapTCLSTK" />
+                                        <label for="HoHapTCLSTK">Hô hấp</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="HoHapTCLSTK" name="HoHapTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-4">
+                                        <input type="checkbox" id="TimMachTCLSTK" />
+                                        <label for="TimMachTCLSTK">Tim mạch: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="TimMachTCLSTK" name="TimMachTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group row mb-2">
+                                    <div class="checkbox icheck-belizehole col-2">
+                                        <input type="checkbox" id="KhacNgoaiKhopTCLSTK" />
+                                        <label for="KhacNgoaiKhopTCLSTK">Khác: </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" id="KhacNgoaiKhopTCLSTK" name="KhacNgoaiKhopTCLSTK" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="KhacNgoaiKhopTCLSTK" class="col-12">2.2 Liên quan đến bệnh lý mắc kèm </label>
+                            <div class="col">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!-- #end Triệu chứng lâm sàng -->
+                    <!-- #start Kết quả ngoại viện -->
+                    <fieldset class="border p-2">
+                        <legend class="col-auto mb-0" style="font-size:14px;">Kết quả ngoại viện</legend>
+                        <label class="col-form-label col-auto">1. Kết quả xét nghiệm</label>
+                        <div class="row">
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-success mt-2"><i class="fas fa-plus"></i> Thêm mới</button>
+                            </div>
+                            <div class="col">
+                                <table class="table table-bordered table-striped dataTable dtr-inline" role="grid" id="tableXetNghiem">
+                                    <thead>
+                                        <tr>
+                                            <th class="w-auto text-nowrap">STT</th>
+                                            <th class="w-auto text-nowrap">Tên XN</th>
+                                            <th class="w-auto text-nowrap">KQ</th>
+                                            <th class="w-auto text-nowrap">Đơn vị</th>
+                                            <th class="w-auto text-nowrap">Thời gian</th>
+                                            <th class="w-auto text-nowrap">Nơi trả KQ</th>
+                                            <th class="w-auto text-nowrap">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <label class="col-form-label col-auto">2. Kết quả CĐHA</label>
+                        <div class="row justify-content-between">
+                            <div class="col-6">
+                                <div class="form-group row mb-0 ml-3">
+                                    <div class="checkbox icheck-belizehole col-auto">
+                                        <input type="checkbox" id="KetQuaXray" />
+                                        <label for="KetQuaXray">Viêm khớp CC trên X-ray: </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row mb-0 ml-3">
+                                    <div class="checkbox icheck-belizehole col-auto">
+                                        <input type="checkbox" id="KetQuaMRI" />
+                                        <label for="KetQuaMRI">Viêm khớp CC trên MRI: </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!-- #end Kết quả ngoại viện -->
+                    <!-- #start Chẩn đoán -->
+                    <fieldset class="border p-2">
+                        <legend class="col-auto mb-0" style="font-size:14px;">Kết quả ngoại viện</legend>
+                        <div class="form-group row">
+                            <label class="col-form-label col-2">Bệnh chính: </label>
+                            <div class="col-10">
+                                <div class="row">
+                                    <select class="form-control col mr-5 selectICD" id="BenhChinh" name="BenhChinh"></select>
+                                    <input type="hidden" id="selectICD_Chinh" name="selectICD_Chinh" value="001" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <label class="col-form-label col-2">Bệnh kèm theo: </label>
+                            <div class="col-10">
+                                <div class="row mb-1">
+                                    <select class="form-control col mr-5 selectICD" id="BenhPhu1" name="BenhPhu1"></select>
+                                    <input type="hidden" id="selectICD_Phu1" name="selectICD_Phu1" value="003" />
+                                </div>
+                                <div class="row mb-1">
+                                    <select class="form-control col mr-5 selectICD" id="BenhPhu2" name="BenhPhu2"></select>
+                                    <input type="hidden" id="selectICD_Phu2" name="selectICD_Phu2" value="004" />
+                                </div>
+                                <div class="row mb-1">
+                                    <select class="form-control col mr-5 selectICD" id="BenhPhu3" name="BenhPhu3"></select>
+                                    <input type="hidden" id="selectICD_Phu3" name="selectICD_Phu3" value="005" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!-- #end Chẩn đoán -->
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </form>
+        <!-- /.card -->
+    </div>
+</div>
+<!-- /.row -->
+
+<script type="text/javascript">
+    (function () {
+        document.querySelector('body').addEventListener('scriptsLoaded', function () {
+
+            $(function () {
+                $('#ngayKham').datetimepicker({ format: 'DD/MM/YYYY', locale: 'vi' });
+                $('#gioKham').datetimepicker({ format: 'HH:mm' });
+                $('#ThangKP').datetimepicker({ format: 'MM', locale: 'vi' });
+                $('#NamKP').datetimepicker({ format: 'YYYY' });
+                $('#Mach').inputmask({ alias: 'numeric' });
+                $('#NhietDo').inputmask({ alias: 'numeric' });
+                $('#HA').inputmask({ alias: 'numeric' });
+                $('#HA2').inputmask({ alias: 'numeric' });
+                $('#NhipTho').inputmask({ alias: 'numeric' });
+                $('#ChieuCao').inputmask({ alias: 'numeric' });
+                $('#CanNang').inputmask({ alias: 'numeric' });
+                $('#BMI').inputmask({ alias: 'numeric' });
+            });
+
+            $(function () {
+                $('.selectICD').select2({
+                    ajax: {
+                        url: '/BenhNhan/GetICD',
+                        dataType: 'json',
+                        data: function (params) {
+                            return {
+                                term: params.term,
+                            };
+                        },
+                        processResults: function (data) {
+                            return {
+                                results: $.map(data.data, function (item) {
+                                    return {
+                                        text: item.maICD + ' | ' + item.tenICD,
+                                        id: item.maICD
+                                    }
+                                })
+                            };
+                        }
+                    },
+                    placeholder: 'Chọn chẩn đoán hoặc mã ICD',
+                    allowClear: true
+                });
+                function searchICD(id, maICD) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/BenhNhan/GetICD?maICD=' + maICD
+                    }).then(function (data) {
+                        // create the option and append to Select2
+                        var option = new Option(data.data.maICD + ' | ' + data.data.tenICD, data.data.maICD, true, true);
+                        $(id).append(option).trigger('change');
+                        // manually trigger the `select2:select` event
+                        $(id).trigger({
+                            type: 'select2:select',
+                            params: {
+                                data: data
+                            }
+                        });
+                    });
+                };
+                searchICD('#BenhChinh', (document.getElementById("selectICD_Chinh") || {}).value);
+                searchICD('#BenhPhu1', (document.getElementById("selectICD_Phu1") || {}).value); 
+                searchICD('#BenhPhu2', (document.getElementById("selectICD_Phu2") || {}).value); 
+                searchICD('#BenhPhu3', (document.getElementById("selectICD_Phu3") || {}).value);          
+            });
+        });
+    })();
+</script>

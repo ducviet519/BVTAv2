@@ -1,0 +1,250 @@
+﻿@model DataBVTA.Models.ViewModels.PermissionViewModel
+<div class="tab-custom-content">
+    <div class="row">
+        <div class="col"><label class="col-form-label" style="font-size:16px; text-transform:uppercase">Danh sách nhóm chức năng</label></div>
+        <div class="col">
+            <button class="btn btn-success float-right mr-3" id="addController"><i class="fa fa-plus"></i> &nbsp Thêm Controller</button>
+            <button class="btn btn-success float-right mr-3" id="addAction"><i class="fa fa-plus"></i> &nbsp Thêm Action</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-8">
+        <table class="table table-bordered table-striped dataTable dtr-inline" width="100%" role="grid" id="tableMenus">
+            <thead>
+                <tr>
+                    <th class="text-wrap w-auto">#</th>
+                    <th class="text-wrap w-auto">Tên chức năng</th>
+                    <th class="text-wrap w-auto">Area</th>
+                    <th class="text-wrap w-auto">Tiện ích</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="col-4">
+        <form id="menuForm" method="post" asp-controller="Admin" asp-action="AddMenu">
+            <div class="card-body m-0 p-0">
+                <div class="tab-custom-content"><label class="col-form-label col-12 text-center">Tạo chuỗi Chức năng</label></div>
+                <div class="row form-group">
+                    <div class="col-2"><label class="col-form-label">Controller:</label></div>
+                    <div class="col">
+                        <select class="form-control controller-list" id="ControllerID" name="ControllerID"></select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-2"><label class="col-form-label">Action:</label></div>
+                    <div class="col">
+                        <select class="form-control action-list" id="ActionID" name="ActionID"></select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-2"><label class="col-form-label">Menu:</label></div>
+                    <div class="col"><input type="text" class="form-control" name="Name" id="Name" /></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-2"><label class="col-form-label">Mô tả:</label></div>
+                    <div class="col"><textarea rows="4" class="form-control" name="Area" id="Area"></textarea></div>
+                </div>
+                <!-- /.card-body -->
+                <div class="row justify-content-center">
+                    <div class="col-auto mr-3">
+                        <button type="reset" class="btn btn-info">Làm mới</button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-success" id="btnAddMenu">Thêm mới</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function () {
+        document.querySelector('body').addEventListener('scriptsLoaded', function () {
+
+            // .. do your thing here
+            var columnData = [
+                {
+                    "data": null,
+                    "render": function (data, title, row, meta) {
+                        return meta.row + 1;
+                    },
+                    "class": "text-center"
+                },
+                { "data": "name" },
+                { "data": "area" },
+                {
+                    "data": { menuID: "menuID", name: "name" },
+                    "render": function (data, title, row, meta) {
+                        var btnDelete = '<button type="button" class="btn btn-link btn-sm" data-toggle="menu-delete" data-target="#deleteMenu-' + meta.row + '" data-url="/Admin/DeleteMenu?menuID=' + data.menuID + '&menuName=' + data.name + '"><i class="fas fa-trash"></i> Xóa</button>';
+                        return btnDelete;
+                    },
+                    "class": "text-center"
+                },
+            ]
+            searchDataTable("#tableMenus", columnData, "/Admin/GetMenu", 10, "3");
+
+            $('#ControllerID').select2({
+                ajax: {
+                    url: '/Admin/GetController',
+                    dataType: 'json',
+                    data: function (term) {
+                        return {
+                            term: term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data.data, function (item) {
+                                return {
+                                    text: item.controllerName,
+                                    id: item.controllerID
+                                }
+                            })
+                        };
+                    }
+                }
+            })
+
+            $('#ActionID').select2({
+                ajax: {
+                    url: '/Admin/GetAction',
+                    dataType: 'json',
+                    data: function (term) {
+                        return {
+                            term: term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data.data, function (item) {
+                                return {
+                                    text: item.actionName,
+                                    id: item.actionID
+                                }
+                            })
+                        };
+                    }
+                }
+            })
+
+            $('body .tab-custom-content').on('click', '#addController', function () {
+                let controllerName;
+                let person = prompt("Nhập tên Controller:", "Controller");
+                if (person == null || person == "") {
+                    controllerName = "";
+                } else {
+                    controllerName = person;
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Admin/AddController?controllerName=' + controllerName,
+                        success: function (data) {
+                            $(this).callToast(data.result, data.title, data.message);
+                        },
+                        error: function (data) {
+                            $(this).callToast(data.result, data.title, data.message);
+                        }
+                    });
+                }
+            });
+
+            $('body .tab-custom-content').on('click', '#addAction', function () {
+                let actionName;
+                let person = prompt("Nhập tên Action:", "Action");
+                if (person == null || person == "") {
+                    actionName = "";
+                } else {
+                    actionName = person;
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Admin/AddAction?actionName=' + actionName,
+                        success: function (data) {
+                            $(this).callToast(data.result, data.title, data.message);
+                        },
+                        error: function (data) {
+                            $(this).callToast(data.result, data.title, data.message);
+                        }
+                    });
+                }
+            });
+
+            $('body .tab-pane').on('click', '#btnAddMenu', function () {
+                var menuName = ((document.getElementById("Name") || {}).value) || "";
+
+                if (menuName == "") { $(this).callToast("info", "Thông báo!", "Menu đang để trống"); }
+                else {
+                    var exists = !! ~document.getElementById('tableMenus').innerHTML.indexOf(document.getElementById('Name').value);
+                    if (exists) {
+                        $(this).callToast("info", "Thông báo!", "Chức năng đã tồn tại, xin vui lòng chọn tên khác");
+                    }
+                    else {
+                        var data = $("#menuForm").serialize();
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Admin/AddMenu',
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
+                            data: data,
+                            success: function (data) {
+                                $(this).callToast(data.result, data.title, data.message);
+                            },
+                            error: function (data) {
+                                $(this).callToast(data.result, data.title, data.message);
+                            }
+                        }).done(function () {
+                            searchDataTable("#tableMenus", columnData, "/Admin/GetMenu", 10, "3");
+                            $(this).clearData($('#roleForm'));
+                        });
+                    }
+                }
+            });
+
+            $('body .tab-pane').on('change keyup paste', '#ControllerID', function () {
+
+                var controller = $('#ControllerID option:selected').text() || "";
+                var action = $('#ActionID option:selected').text() || "";
+
+                if (controller != "" && action != "") {
+                    { document.getElementById("Name").value = "Permission." + controller + "." + action; }
+                }
+                else if (controller == "" && action != "") { document.getElementById("Name").value = "Permission." + action; }
+                else if (controller != "" && action == "") { document.getElementById("Name").value = "Permission." + controller; }
+            });
+            $('body .tab-pane').on('change keyup paste', '#ActionID', function () {
+
+                var controller = $('#ControllerID option:selected').text() || "";
+                var action = $('#ActionID option:selected').text() || "";
+                if (controller != "" && action != "") {
+                    { document.getElementById("Name").value = "Permission." + controller + "." + action; }
+                }
+                else if (controller == "" && action != "") { document.getElementById("Name").value = "Permission." + action; }
+                else if (controller != "" && action == "") { document.getElementById("Name").value = "Permission." + controller; }
+            });
+            $('body .tab-pane').on('focusout', '#Name', function () {
+                var menuName = ((document.getElementById("Name") || {}).value) || "";
+                if (menuName != "") {
+                    if (menuName.slice(0, 11) == "Permission.") { document.getElementById("Name").value = menuName; }
+                    else if (menuName.slice(0, 11) != "Permission.") { document.getElementById("Name").value = "Permission." + menuName; }
+                }
+            });
+
+            $('body .tab-pane').on('click', 'button[data-toggle="menu-delete"]', function (event) {
+                var url = $(this).data('url');
+                if (confirm('Xóa sẽ không thể khôi phục. Bạn có muốn xóa?')) {
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        success: function (data) {
+                            $(this).callToast(data.result, data.title, data.message);
+                        },
+                        error: function (data) {
+                            $(this).callToast(data.result, data.title, data.message);
+                        }
+                    }).done(function (data) {
+                        searchDataTable("#tableMenus", columnData, "/Admin/GetMenu", 10, "3");
+                    });
+                }
+            });
+        });
+    })();
+</script>

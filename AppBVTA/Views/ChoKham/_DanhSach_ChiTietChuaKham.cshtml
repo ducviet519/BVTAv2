@@ -1,0 +1,57 @@
+﻿@model DataBVTA.Models.ViewModels.DanhSachDangKyKhamBenh
+@{
+    Layout = null;
+}
+<style>
+    .dataTables_length{
+        display:none;
+    }
+</style>
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle"> <i class="fas fa-th-list"></i>  Danh sách chi tiết</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white;">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover text-nowrap" width="100%" id="chuaKhamTable">
+                    <thead class="thead">
+                        <tr>
+                            <th class="w-auto text-nowrap">STT</th>
+                            <th class="w-auto text-nowrap">PID</th>
+                            <th class="w-auto text-nowrap">Họ tên</th>
+                            <th class="w-auto text-nowrap">Năm sinh</th>
+                            <th class="w-auto text-nowrap">Phòng khám</th>
+                            <th class="w-auto text-nowrap">Dịch vụ chỉ định</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.DanhSachChoKham != null && Model.DanhSachChoKham.Count > 0)
+                        {
+                            foreach (var item in Model.DanhSachChoKham)
+                            {
+                                <tr>
+                                    <td class="text-wrap text-center">@item.stt</td>
+                                    <td class="text-wrap text-center">@item.mabn</td>
+                                    <td class="text-wrap">@item.hoten</td>
+                                    <td class="text-wrap text-center">@item.namsinh</td>
+                                    <td class="text-wrap">@item.tenphongkham</td>
+                                    <td class="text-wrap">@item.tenchidinh</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#chuaKhamTable').DataTable();
+    })
+</script>

@@ -1,0 +1,54 @@
+﻿@model DataBVTA.Models.ViewModels.DanhSachDangKyKhamBenh
+@{
+    ViewData["Title"] = "TongQuanKhamBenh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .card-title {
+        float: unset;
+    }
+
+    .btn {
+        display: unset;
+    }
+
+    .dataTables_filter {
+        display: none;
+    }
+</style>
+
+<ul class="nav nav-tabs pl-5" id="custom-content-above-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="tab-DanhSachDangKyKCB" data-toggle="pill" href="#content-DanhSachDangKyKCB" role="tab" aria-controls="content-DanhSachDangKyKCB" aria-selected="true">Tổng quan</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="tab-DanhSachChoKham" data-toggle="pill" href="#content-DanhSachChoKham" role="tab" aria-controls="content-DanhSachChoKham" aria-selected="false">Danh sách chờ khám</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="tab-DanhSachDangLamCLS" data-toggle="pill" href="#content-DanhSachDangLamCLS" role="tab" aria-controls="content-DanhSachDangLamCLS" aria-selected="false">Danh sách đang làm cận lâm sàng</a>
+    </li>
+</ul>
+<div class="tab-content pl-3 pr-3" id="custom-content-below-tabContent">
+    <div class="tab-pane fade show active" id="content-DanhSachDangKyKCB" role="tabpanel" aria-labelledby="content-DanhSachDangKyKCB">
+        @await Html.PartialAsync("_DanhSach_DangKyKCB", Model)
+    </div>
+    <div class="tab-pane fade" id="content-DanhSachChoKham" role="tabpanel" aria-labelledby="content-DanhSachChoKham">
+        @await Html.PartialAsync("_DanhSach_ChoKham", Model)
+    </div>
+    <div class="tab-pane fade" id="content-DanhSachDangLamCLS" role="tabpanel" aria-labelledby="content-DanhSachDangLamCLS">
+        @await Html.PartialAsync("_DanhSach_DangLamCLS", Model)
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('body').on('click', 'a[data-toggle="ajax-modal"]', function (event) {
+                var url = $(this).data('url');
+                $(this).callModal(url);
+            });
+            $('.selectPhongKham').select2();
+        });
+    </script>
+}
+

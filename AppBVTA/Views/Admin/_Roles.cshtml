@@ -1,0 +1,136 @@
+﻿@model DataBVTA.Models.ViewModels.PermissionViewModel
+<style>
+    table.dataTable tbody tr.selected {
+        color: unset;
+        background-color: unset;
+    }
+</style>
+<div class="tab-custom-content">
+    <div class="row">
+        <div class="col"><label class="col-form-label" style="font-size:16px; text-transform:uppercase">Danh sách nhóm quyền</label></div>
+        <div class="col">
+            @*<a class="btn btn-success float-right" data-toggle="ajax-modal" data-target="#addRoles" data-url="/Roles/CreateRoles"><i class="fa fa-plus"></i> &nbsp Thêm Role</a>*@
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-8">
+        <table class="table table-bordered table-striped dataTable dtr-inline" width="100%" role="grid" id="tableRoles">
+            <thead>
+                <tr>
+                    <th class="text-wrap w-auto">#</th>
+                    <th class="text-wrap w-auto">Tên nhóm quyền</th>
+                    <th class="text-wrap w-auto">Mô tả</th>
+                    <th class="text-wrap w-auto">Tiện ích</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="col-4">
+        <form method="post" asp-controller="Permission" asp-action="CreateRoles" id="roleForm">
+            <div class="card-body m-0 p-0">
+                <div class="tab-custom-content"><label class="col-form-label col-12 text-center">Tạo chuỗi Chức năng</label></div>
+                <div class="row form-group">
+                    <div class="col-2"><label class="col-form-label ">Tên Role:</label></div>
+                    <div class="col"><input type="text" class="form-control" name="RoleName" id="RoleName" placeholder="Nhập tên Role" required /></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-2"><label class="col-form-label ">Mô tả:</label></div>
+                    <div class="col"><textarea rows="4" class="form-control" name="Description" id="Description"></textarea></div>
+                </div>
+                <!-- /.card-body -->
+                <div class="row justify-content-center">
+                    <div class="col-auto mr-3">
+                        <button type="reset" class="btn btn-info">Làm mới</button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-success" id="btnAddRole">Thêm mới</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function () {
+        document.querySelector('body').addEventListener('scriptsLoaded', function () {
+
+            // .. do your thing here
+            var columnData = [
+                {
+                    "data": null,
+                    "render": function (data, title, row, meta) {
+                        return meta.row + 1;
+                    },
+                    "class" : "text-center"
+                },
+                { "data": "roleName" },
+                { "data": "description" },
+                {
+                    "data": { roleID: "roleID", roleName: "roleName" },
+                    "render": function (data, title, row, meta) {
+                        if (data.roleName == "Admin" || data.roleName == "User" || data.roleName == "Manager") {
+                            var btnDelete = '<button class="btn btn-link btn-sm disabled"><i class="fas fa-trash"></i> Xóa</button>';
+                        }
+                        else {
+                            var btnDelete = '<button type="button" class="btn btn-link btn-sm" data-toggle="role-delete" data-target="#deleteRole-' + meta.row + '" data-url="/Admin/DeleteRole?roleID=' + data.roleID + '&roleName=' + data.roleName + '"><i class="fas fa-trash"></i> Xóa</button>';
+                        }
+                        return btnDelete;
+                    },
+                    "class": "text-center"
+                },
+            ]
+            searchDataTable("#tableRoles", columnData, "/Admin/GetRoles", 10, "3");
+
+            $('body .tab-pane').on('click', '#btnAddRole', function (event) {
+                event.preventDefault();
+                var exists = !! ~document.getElementById('tableRoles').innerHTML.indexOf(document.getElementById('RoleName').value);
+                if (exists) {
+                    $(this).callToast("info", "Thông báo!", "Tên Role đã tồn tại, vui lòng sử dụng tên khác");
+                }
+                else {
+                    var roleName = ((document.getElementById("RoleName") || {}).value) || "";
+                    if (roleName == "") {
+                        $(this).callToast("info", "Thông báo!", "Tên Role đang để trống");
+                    }
+                    else {
+                        var data = $("#roleForm").serialize();
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Admin/InsertOrUpdateRole',
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // when we use .serialize() this generates the data in query string format. this needs the default contentType (default content type is: contentType: 'application/x-www-form-urlencoded; charset=UTF-8') so it is optional, you can remove it
+                            data: data,
+                            success: function (data) {
+                                $(this).callToast(data.result, data.title, data.message);
+                            },
+                            error: function (data) {
+                                $(this).callToast(data.result, data.title, data.message);
+                            }
+                        }).done(function () {
+                            searchDataTable("#tableRoles", columnData, "/Admin/GetRoles", 10, "3");
+                            $(this).clearData($('#roleForm'));
+                        });
+                    }
+                }
+            });
+            $('body .tab-pane').on('click', 'button[data-toggle="role-delete"]', function (event) {
+                var url = $(this).data('url');
+                if (confirm('Xóa sẽ không thể khôi phục. Bạn có muốn xóa?')) {
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        success: function (data) {
+                            $(this).callToast(data.result, data.title, data.message);
+                        },
+                        error: function (data) {
+                            $(this).callToast(data.result, data.title, data.message);
+                        }
+                    }).done(function (data) {
+                        searchDataTable("#tableRoles", columnData, "/Admin/GetRoles", 10, "");
+                    });
+                }
+            });
+        });
+    })();
+</script>

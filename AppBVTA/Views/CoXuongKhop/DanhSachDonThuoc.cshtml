@@ -1,0 +1,136 @@
+﻿@model DataBVTA.Models.ViewModels.ThongTinBenhNhanVM
+@{
+    ViewData["Title"] = "Danh sách đơn thuốc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .btn {
+        display: unset;
+    }
+
+    .nav-sidebar .nav-item > .nav-link {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .nav-sidebar .nav-item:hover {
+        background-color: transparent;
+    }
+
+    .dataTables_filter {
+        display: none;
+    }
+    .dataTables_length {
+        display: none;
+    }
+    tr.group {
+        background-color: #49a0de !important;
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .card {
+        border-radius: unset;
+    }
+</style>
+
+<ul class="nav nav-tabs pl-5" id="custom-content-above-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="tab-PhieuKhamBenh" data-toggle="pill" href="#content-PhieuKhamBenh" role="tab" aria-controls="content-PhieuKhamBenh" aria-selected="true">Phiếu khám</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="tab-BieuDo" data-toggle="pill" href="#content-BieuDo" role="tab" aria-controls="content-BieuDo" aria-selected="false">Biểu đồ</a>
+    </li>
+</ul>
+<div class="tab-content pl-3 pr-3" id="custom-content-below-tabContent">
+    <div class="tab-pane fade show active" id="content-PhieuKhamBenh" role="tabpanel" aria-labelledby="content-PhieuKhamBenh">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    @await Component.InvokeAsync("ThongTinHanhChinh", new {mabn = Model.mabn})
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-3 pr-0">
+                            @await Component.InvokeAsync("DanhMuc", new {mabn = Model.mabn})
+                        </div>
+                        <div class="col-9 pl-0">
+                            <!-- /.row -->
+                            <div class="row">
+                                <div class="col-12">
+
+                                        <div class="card mb-0 ml-0 box-shadow-disable">
+                                            <div class="card-header">
+                                                <h3 class="card-title head-text">Đơn thuốc</h3>
+                                                <div class="card-tools">
+                                                    <button type="button" class="btn btn-info btn-sm mr-2" data-toggle="ajax-modal" data-target="#phongkhamCXK-3" data-url="/CoXuongKhop/ThemMoiDonThuoc"><i class="fas fa-plus"></i> Tạo toa thuốc mới</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body" style="min-height:305px">
+                                                @*@foreach (var country in Model.Customers.GroupBy(c => c.Country))
+                                                {*@
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title head-text">Đơn thuốc 1</h3>
+                                                        <div class="card-tools">
+                                                            <button type="button" class="btn btn-info btn-sm mr-2" data-toggle="ajax-modal" data-target="#phongkhamCXK-3" data-url="/CoXuongKhop/ThemMoiDonThuoc"><i class="fas fa-edit"></i> Sửa toa</button>
+                                                            <button type="button" class="btn btn-success btn-sm mr-2"><i class="fas fa-print"></i> In toa thuốc</button>
+                                                            <button type="button" class="btn btn-danger btn-sm mr-2"><i class="fas fa-trash-alt"></i> Hủy toa</button>
+                                                        </div>
+                                                    </div>
+                                                    <table class="table table-bordered text-nowrap display" style="width: 100%" id="toaThuocTable">
+                                                        <thead class="thead">
+                                                            <tr>
+                                                                <th class="w-auto text-nowrap">Dịch vụ</th>
+                                                                <th class="w-auto text-nowrap">Số lượng</th>
+                                                                <th class="w-auto text-nowrap">Ngày chỉ định</th>
+                                                                <th class="w-auto text-nowrap">Ngày lấy mẫu</th>
+                                                                <th class="w-auto text-nowrap">Kết quả</th>
+                                                                <th class="w-auto text-nowrap">Chi tiết</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @*@foreach (var customer in country.ToArray())
+                                                            {
+                                                                <tr>
+                                                                    <td></td>
+                                                                </tr>
+                                                            }*@
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                @* } *@
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="content-BieuDo" role="tabpanel" aria-labelledby="content-BieuDo">
+        @await Html.PartialAsync("_BieuDo")
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('body').on('click', 'button[data-toggle="ajax-modal"]', function (event) {
+                var url = $(this).data('url');
+                $(this).callModal(url);
+            });
+        });
+        $('table.display').DataTable();
+
+    </script>
+}
+
+

@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+}
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle"> <i class="fas fa-th-list"></i>  Kết quả Xét nghiệm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white;">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myForm" method="post" asp-area="" asp-action="KhamLamSang" asp-controller="CoXuongKhop">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label for="CRP" class="col-4 col-form-label">Ngày kết quả:</label>
+                                <label for="CRP" class="col-auto col-form-label" style="color: dodgerblue; font-weight:bold;">27/06/2022 08:15</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label for="CRP" class="col-3 col-form-label">Ngày duyệt:</label>
+                                <label for="CRP" class="col-auto col-form-label bluebold" style="color: dodgerblue; font-weight:bold;">27/06/2022 08:15</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label for="CRP" class="col-4 col-form-label">Bác sĩ chỉ định:</label>
+                                <label for="CRP" class="col-auto col-form-label bluebold" style="color: dodgerblue; font-weight:bold;">ThS.BS Nguyễn Thị A</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label for="CRP" class="col-3 col-form-label">Ngày chỉ định:</label>
+                                <label for="CRP" class="col-auto col-form-label bluebold" style="color: dodgerblue; font-weight:bold;">27/06/2022 08:15</label>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-bordered text-nowrap" style="width: 100%" id="tableKetQuaXetNghiem">
+                        <thead class="thead">
+                            <tr>
+                                <th class="w-auto text-nowrap">STT</th>
+                                <th class="w-auto text-nowrap">Thông số</th>
+                                <th class="w-auto text-nowrap">Kết quả</th>
+                                <th class="w-auto text-nowrap">Chuẩn nam</th>
+                                <th class="w-auto text-nowrap">Chuẩn nữ</th>
+                                <th class="w-auto text-nowrap">Bình thường</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-wrap">183</td>
+                                <td class="text-wrap">Chẩn đoán hình ảnh</td>
+                                <td class="text-wrap">11-7-2014</td>
+                                <td class="text-wrap"><span class="tag tag-success">Approved</span></td>
+                                <td class="text-wrap">Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                <td class="text-wrap"><span class="tag tag-success">Approved</span></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>*@
+        </div>
+    </div>
+</div>

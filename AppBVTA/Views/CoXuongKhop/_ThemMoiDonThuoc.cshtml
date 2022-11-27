@@ -1,0 +1,253 @@
+﻿@{
+    Layout = null;
+}
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle"> <i class="fas fa-th-list"></i>  Kê đơn - Khách hàng: | Họ và tên: | Năm sinh:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white;">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myForm" method="post" asp-area="" asp-action="KhamLamSang" asp-controller="CoXuongKhop">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <div class="col-6 pr-5">
+                                    <label class="col-12">Ngày kê đơn:</label>
+                                    <div class="col-12">
+                                        <input type="text" id="ngayKeDon" name="ngayKeDon" class="form-control datetimepicker-input ngayKeDon" data-toggle="datetimepicker" data-target="#ngayKeDon" />
+                                    </div>
+                                </div>
+                                <div class="col-6 pr-5">
+                                    <label class="col-12">Mã ICD:</label>
+                                    <label class="col-12" style="color: dodgerblue; font-weight:bold;">M95</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="col-12">Chẩn đoán:</label>
+                                <label class="col-12" style="color: dodgerblue; font-weight:bold;">Viêm khớp cột sống</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12 col-form-label">Ghi chú toa thuốc:</label>
+                        <textarea class="form-control col-12" rows="2"></textarea>
+                    </div>
+                    <table class="table table-bordered" style="width: 100%" id="themThuocTable">
+                        <thead class="thead">
+                            <tr>
+                                <th class="w-auto text-nowrap">Tên thuốc</th>
+                                <th class="w-auto text-nowrap">Cách dùng</th>
+                                <th class="w-auto text-nowrap">SL</th>
+                                <th class="w-auto text-nowrap">Bắt đầu</th>
+                                <th class="w-auto text-nowrap">Kết thúc</th>
+                                <th class="w-auto text-nowrap">Tiện ích</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label class="col-12">Mã thuốc:</label>
+                            <label class="col-12" style="color: dodgerblue; font-weight:bold;" id="maThuoc"></label>
+                        </div>
+                        <div class="col-10">
+                            <label class="col-12">Tên thuốc:</label>
+                            <div class="col-12">
+                                <select class="example form-control cachdung" data-placeholder="Chọn Thuốc">
+                                    <option></option>
+                                    <option value="0">0001|Tên thuốc 1|Viên|10|Kho thuốc IVF|Hoạt chất 01|Uống</option>
+                                    <option value="1">0002|Tên thuốc 2|Ống|20|Kho thuốc IVF|Hoạt chất 02|Tiêm</option>
+                                    <option value="2">0003|Tên thuốc 3|Lọ|30|Kho thuốc IVF|Hoạt chất 03|Tiêm</option>
+                                    <option value="3">0004|Tên thuốc 4|Chai|40|Kho thuốc IVF|Hoạt chất 04|Truyền</option>
+                                    <option value="4">0005|Tên thuốc 5|Viên|50|Kho thuốc IVF|Hoạt chất 05|Uống</option>
+                                    <option value="5">0006|Tên thuốc 6|Tuýp|60|Kho thuốc IVF|Hoạt chất 06|Bôi</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="col-12">Mỗi ngày</label>
+                            <div class="form-group row">
+                                <input type="text" class="form-control col-4 cachdung" id="soLan" />
+                                <label class="col-form-label col-auto">/lần/</label>
+                                <input type="text" class="form-control col-4 cachdung" id="soThuocMoiLan" />
+                                <label class="col-form-label col-auto" id="donViTinh"></label>
+                                <input type="hidden" id="donViTinh2" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label class="col-12">Hoạt chất</label>
+                                <input type="text" class="form-control col-12" id="HoatChat" name="HoatChat" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-12">Số lượng:</label>
+                                <div class="col-12"><input type="text" id="SoLuong" class="form-control" /></div>
+                                <input type="hidden" id="soLuongTong" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-12">Đường dùng:</label>
+                                <div class="col-12"><input type="text" id="DuongDung" class="form-control cachdung" /></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-12">Giờ dùng (24h):</label>
+                                <div class="col-12"><input type="text" id="GioDung" class="form-control datetimepicker-input cachdung" data-toggle="datetimepicker" data-target="#GioDung" autocomplete="off" /></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-12">Từ ngày:</label>
+                                <div class="col-12"><input type="text" id="TuNgay" class="form-control datetimepicker-input cachdung" data-toggle="datetimepicker" data-target="#TuNgay" autocomplete="off" /></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group row">
+                                <label class="col-12">Đến ngày:</label>
+                                <div class="col-12"><input type="text" id="DenNgay" class="form-control datetimepicker-input cachdung" data-toggle="datetimepicker" data-target="#DenNgay" autocomplete="off" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12">Liều dùng:</label>
+                        <textarea class="form-control col-12 cachdung" rows="2" id="LieuDung" name="LieuDung"></textarea>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-12">Cách dùng:</label>
+                        <textarea class="form-control col-12" rows="3" id="CachDung" name="CachDung"></textarea>
+                    </div>
+                    <div class="modal-footer row justify-content-center pb-0">
+                        <button type="button" class="btn btn-success ml-3" id="themThuoc"><i class="fas fa-plus"></i> Thêm thuốc</button>
+                        <button type="submit" class="btn btn-primary ml-3"><i class="fas fa-save"></i> Lưu toa thuốc</button>
+                        <button type="button" class="btn btn-secondary ml-3" data-dismiss="modal"><i class="fas fa-times"></i> Đóng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#ngayKeDon').datetimepicker({ format: 'DD/MM/YYYY', locale: 'vi' });
+        $('#GioDung').datetimepicker({ format: 'HH:mm', locale: 'vi' });
+        $('#TuNgay').datetimepicker({ format: 'DD/MM/YYYY', locale: 'vi' });
+        $('#DenNgay').datetimepicker({ format: 'DD/MM/YYYY', locale: 'vi' });
+    });
+    $(document).ready(function () {
+        var clicks = -1;
+        var table = $('#themThuocTable').DataTable();
+        $("#themThuoc").on('click', function (e) {
+            clicks++;
+            var item = $(".example").find(":selected").text().split('|');
+            var cachDung = ((document.getElementById("CachDung") || {}).value) || "";
+            var soLuong = ((document.getElementById("SoLuong") || {}).value) || "";
+            var dungTuNgay = ((document.getElementById("TuNgay") || {}).value) || "";
+            var dungDenNgay = ((document.getElementById("DenNgay") || {}).value) || "";
+            if (cachDung === "" || soLuong === "" || dungTuNgay === "" || dungDenNgay === "") { $(".example").callToast("info", "Thông báo!", "Không thể thêm thuốc! Vui lòng kiểm tra lại Cách dùng, Số lượng, Từ ngày, Đến ngày không được để trống."); }
+            else {
+                var exists = !! ~document.getElementById('themThuocTable').innerHTML.indexOf(item[1]);
+                if (exists) {
+                    $(".example").callToast("info", "Thông báo!", "Thuốc " + item[1] + " đã tồn tại. Vui lòng kiểm tra lại danh sách và xóa thuốc trùng trước khi thêm mới");
+                }
+                else {
+                    var rowNode = table.row.add([
+                        item[1] + '<input type="hidden" id="tenThuoc-' + clicks + '" name="tenThuoc-' + clicks + '" value="' + item[1] + '"/>',
+                        cachDung + '<input type="hidden" id="cachDung-' + clicks + '" name="cachDung-' + clicks + '" value="' + cachDung + '"/>',
+                        soLuong + '<input type="hidden" id="soLuong-' + clicks + '" name="soLuong-' + clicks + '" value="' + soLuong + '"/>',
+                        dungTuNgay + '<input type="hidden" id="tuNgay-' + clicks + '" name="tuNgay-' + clicks + '" value="' + dungTuNgay + '"/>',
+                        dungDenNgay + '<input type="hidden" id="denNgay-' + clicks + '" name="denNgay-' + clicks + '" value="' + dungDenNgay + '"/>',
+                        '<button id="deleteThuoc" class="btn btn-link btn-sm">Xóa</button>'
+                    ]).node().id = 'rowID-' + clicks;
+                    table.draw(false);
+                    $(rowNode).find('td').eq(1).addClass('text-wrap');
+                    $(".example").callToast("success", "Thành công", "Thuốc: " + item[1] + " đã được thêm thành công.");
+                }
+            }
+        });
+        $('#themThuocTable').on('click', '#deleteThuoc', function () {
+            var row = $(this).parents('tr');
+
+            if ($(row).hasClass('child')) {
+                table.row($(row).prev('tr')).remove().draw();
+            } else {
+                table
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+            }
+            $(".example").callToast("success", "Thành công", "Đã xóa thuốc thành công.");
+        });
+    });
+    $(function () {
+        $(".example").select2({
+            placeholder: function () {
+                $(this).data('placeholder');
+            },
+            width: "100%",
+            allowClear: true,
+            templateResult: function (option) {
+                var item = option.text.split('|');
+                var ob = jQuery(
+                    '<div class="row justify-content-between">' +
+                    '<div class="col-md-2">' + item[0] + '</div>' +
+                    '<div class="col-md-5 text-wrap">' + item[1] + '</div>' +
+                    '<div class="col-md-2">' + item[3] + '</div>' +
+                    '<div class="col-md-3 text-wrap">' + item[4] + '</div>' +
+                    '</div>');
+                return ob;
+            },
+            templateSelection: function (option) {
+                var item = option.text.split('|');
+                return item[1];
+            },
+            escapeMarkup: function (m) {
+                return m;
+            }
+        });
+
+        $(".example").on('change', function (e) {
+            var item = $(".example").find(":selected").text().split('|');
+            document.getElementById('maThuoc').innerText = item[0];
+            document.getElementById('donViTinh').innerText = item[2];
+            document.getElementById('donViTinh2').value = item[2];
+            document.getElementById('HoatChat').value = item[5];
+            document.getElementById('DuongDung').value = item[6];
+
+            $('#SoLuong').inputmask({ alias: 'numeric', max: parseInt(item[3]) });
+            document.getElementById('SoLuong').value = item[3];
+        });
+
+        $('.cachdung').on('propertychange change keyup paste input', function () {
+            var soLan = ((document.getElementById("soLan") || {}).value) || "";
+            var soThuocMoiLan = ((document.getElementById("soThuocMoiLan") || {}).value) || "";
+            var donViTinh = ((document.getElementById("donViTinh2") || {}).value) || "";
+            var duongDung = ((document.getElementById("DuongDung") || {}).value) || "";
+            var lieuDung = ((document.getElementById("LieuDung") || {}).value) || "";
+            var gioDung = ((document.getElementById("GioDung") || {}).value) || "";
+            var dungTuNgay = ((document.getElementById("TuNgay") || {}).value) || "";
+            var dungDenNgay = ((document.getElementById("DenNgay") || {}).value) || "";
+
+            if (soLan === "" || soThuocMoiLan === "" || donViTinh === "" || duongDung === "") { var line1 = ""; }
+            else { var line1 = duongDung + ' mỗi ngày ' + soLan + ' lần, mỗi lần ' + soThuocMoiLan + " " + donViTinh + '.' + '\r\n'; }
+            if (gioDung === "" || dungTuNgay === "" || dungDenNgay === "") { var line2 = ""; }
+            else { var line2 = 'Giờ dùng: ' + gioDung + ' từ ngày: ' + dungTuNgay + ' đến ngày: ' + dungDenNgay; }
+            if (lieuDung === "") { document.getElementById('CachDung').value = line1 + line2; }
+            else { document.getElementById('CachDung').value = lieuDung + '\r\n' + line1 + line2; }
+        });
+    });
+</script>

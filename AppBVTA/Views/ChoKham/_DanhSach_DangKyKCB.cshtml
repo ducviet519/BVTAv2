@@ -1,0 +1,110 @@
+﻿@model DataBVTA.Models.ViewModels.DanhSachDangKyKhamBenh
+@{
+    var region = ViewData["Region"] as string;
+}
+
+<!-- /.row -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title head-text">Danh sách đăng ký khám chữa bệnh</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group row">
+                            <label for="PhongKham" class="col-form-label col-auto">Phòng khám:</label>
+                            <div class="col-auto">
+                                <select class="form-control selectPhongKham" id="PhongKham1" name="PhongKham1" asp-items="@Model.PhongKham">
+                                    <option value="-1" selected="selected">Tất cả phòng khám</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-info ml-5" id="searchKCB">Tìm kiếm</button>
+                        </div>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
+                <table class="table table-bordered table-hover text-nowrap" width="100%" id="dangKyKCBTable">
+                    <thead class="thead">
+                        <tr>
+                            <th class="w-auto text-nowrap">STT</th>
+                            <th class="w-auto text-nowrap">Phòng khám</th>
+                            <th class="w-auto text-nowrap">Tổng số</th>
+                            <th class="w-auto text-nowrap">Chưa khám</th>
+                            <th class="w-auto text-nowrap">CLS</th>
+                            <th class="w-auto text-nowrap">Chờ kết quả</th>
+                            <th class="w-auto text-nowrap">Đã khám</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+<!-- /.row -->
+<script type="text/javascript">
+    (function () {
+        document.querySelector('body').addEventListener('scriptsLoaded', function () {
+
+            $(function () {
+                var phongKham = $("#PhongKham1").find(":selected").val();
+                var hoTenKH = "";
+
+                var searchTerm1 = "param=1";
+                if (phongKham != "")
+                    searchTerm1 += "&phongKham=" + phongKham;
+                if ($.trim(hoTenKH) != "")
+                    searchTerm1 += "&mabn=" + encodeURIComponent($.trim(hoTenKH));
+
+                var columnData = [
+                    {
+                        "data": "stt",
+                        "className": "text-center"
+                    },
+                    { "data": "tenphongkham" },
+                    {
+                        "data": "tongso",
+                        "className": "text-center"
+                    },
+                    {
+                        "data": { chuakham: "chuakham", maphongkham: "maphongkham" },
+                        "render": function (data, title, row) {
+                            return '<a class="btn btn-link btn-sm" data-toggle="ajax-modal" data-target="#phongkhamCXK-' + row.id + '" data-url="/ChoKham/DanhSachChuaKham?mapk=' + data.maphongkham + '">' + data.chuakham + '</a>';
+                        },
+                        "className": "text-center"
+                    },
+                    {
+                        "data": "cls",
+                        "className": "text-center"
+                    },
+                    {
+                        "data": "coketqua",
+                        "className": "text-center"
+                    },
+                    {
+                        "data": "dakham",
+                        "className": "text-center"
+                    },
+                ]
+                searchDataTable("#dangKyKCBTable", columnData, "/ChoKham/GetDanhSachChoKham?" + searchTerm1, 10, "");
+
+                $('#searchKCB').on('click', function () {
+                    var phongKham = $("#PhongKham1").find(":selected").val();
+                    var hoTenKH = "";
+
+                    var searchTerm1 = "param=1";
+                    if (phongKham != "")
+                        searchTerm1 += "&phongKham=" + phongKham;
+                    if ($.trim(hoTenKH) != "")
+                        searchTerm1 += "&mabn=" + encodeURIComponent($.trim(hoTenKH));
+                    searchDataTable("#dangKyKCBTable", columnData, "/ChoKham/GetDanhSachChoKham?" + searchTerm1, 10, "");
+                });
+            });
+
+        });
+    })();
+</script>

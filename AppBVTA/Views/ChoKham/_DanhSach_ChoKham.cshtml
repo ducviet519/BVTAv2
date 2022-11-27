@@ -1,0 +1,114 @@
+﻿@model DataBVTA.Models.ViewModels.DanhSachDangKyKhamBenh
+<!-- /.row -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title head-text">Danh sách chờ khám</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group row">
+                            <label for="PhongKham" class="col-form-label col-auto">Phòng khám:</label>
+                            <div class="col-auto">
+                                <select class="form-control selectPhongKham" id="PhongKham2" name="PhongKham2" asp-items="@Model.PhongKham">
+                                    <option value="-1" selected="selected">Tất cả phòng khám</option>
+                                </select>
+                            </div>
+                            <label for="HoTenKH" class="col-form-label col-auto ml-5">PID/Họ tên KH:</label>
+                            <div class="col-auto">
+                                <input type ="text" class="form-control" id="HoTenKH" name="HoTenKH"/>
+                            </div>
+                            <button class="btn btn-info ml-5" id="searchChoKham">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-hover text-nowrap" width="100%" id="choKhamTable">
+                    <thead class="thead">
+                        <tr>
+                            <th class="w-auto text-nowrap">STT</th>
+                            <th class="w-auto text-nowrap">Giờ đăng ký</th>
+                            <th class="w-auto text-nowrap">Phòng khám</th>
+                            <th class="w-auto text-nowrap">Mã khách hàng</th>
+                            <th class="w-auto text-nowrap">Họ tên</th>
+                            <th class="w-auto text-nowrap">Năm sinh</th>
+                            <th class="w-auto text-nowrap">Giờ hẹn</th>
+                            <th class="w-auto text-nowrap">Dịch vụ</th>
+                            <th class="w-auto text-nowrap">Ghi chú</th>
+                            <th class="w-auto text-nowrap">Thao tác</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+<!-- /.row -->
+<script type="text/javascript">
+    (function () {
+        document.querySelector('body').addEventListener('scriptsLoaded', function () {
+
+            $(function () {
+                var phongKham = $("#PhongKham2").find(":selected").val();
+                var hoTenKH = ((document.getElementById("HoTenKH") || {}).value) || "";
+
+                var searchTerm2 = "param=2";
+                if (phongKham != "")
+                    searchTerm2 += "&phongKham=" + phongKham;
+                if ($.trim(hoTenKH) != "")
+                    searchTerm2 += "&mabn=" + encodeURIComponent($.trim(hoTenKH));
+
+                var columnChoKham = [
+                    {
+                        "data": "stt",
+                        "className": "text-center"
+                    },
+                    {
+                        "data": "giodk",
+                        "className": "text-center"
+                    },
+                    { "data": "tenphongkham" },
+                    {
+                        "data": "mabn",
+                        "className": "text-center"
+                    },
+                    { "data": "hoten" },
+                    {
+                        "data": "namsinh",
+                        "className": "text-center"
+                    },
+                    {
+                        "data": "giohen",
+                        "className": "text-center"
+                    },
+                    { "data": "tenchidinh" },
+                    { "data": "ghichu" },
+                    {
+                        "data": { mabn: "mabn", maphongkham: "maphongkham" },
+                        "render": function (data, row) { return "<a class='btn btn-link btn-sm' href='/CoXuongKhop/PhieuKhamBenh?mabn=" + data.mabn + "&maphongkham=" + data.maphongkham + "'  onclick=PhieuKhamBenh('" + row.id + "'); >Xác nhận</a>"; },
+                        "className": " text-nowrap"
+                    },
+                ]
+                searchDataTable("#choKhamTable", columnChoKham, "/ChoKham/GetDanhSachChoKham?" + searchTerm2, 10, "0,9");
+
+                $('#searchChoKham').on('click', function () {
+                    var phongKham = $("#PhongKham2").find(":selected").val();
+                    var hoTenKH = ((document.getElementById("HoTenKH") || {}).value) || "";
+
+                    var searchTerm2 = "param=2";
+                    if (phongKham != "")
+                        searchTerm2 += "&phongKham=" + phongKham;
+                    if ($.trim(hoTenKH) != "")
+                        searchTerm2 += "&mabn=" + encodeURIComponent($.trim(hoTenKH));
+
+                    searchDataTable("#choKhamTable", columnChoKham, "/ChoKham/GetDanhSachChoKham?" + searchTerm2, 10, "0,9");
+                });
+            });
+
+        });
+    })();
+</script>

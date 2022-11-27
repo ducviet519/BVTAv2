@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle"> <i class="fas fa-th-list"></i>  Kết quả Chẩn đoán Hình ảnh</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color: white;">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="myForm" method="post" asp-area="" asp-action="KhamLamSang" asp-controller="CoXuongKhop">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label for="CRP" class="col-4 col-form-label">Ngày kết quả:</label>
+                                <label for="CRP" class="col-auto col-form-label" style="color: dodgerblue; font-weight:bold;">27/06/2022 08:15</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label for="CRP" class="col-3 col-form-label">Ngày duyệt:</label>
+                                <label for="CRP" class="col-auto col-form-label bluebold" style="color: dodgerblue; font-weight:bold;">27/06/2022 08:15</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label for="CRP" class="col-4 col-form-label">Bác sĩ chỉ định:</label>
+                                <label for="CRP" class="col-auto col-form-label bluebold" style="color: dodgerblue; font-weight:bold;">ThS.BS Nguyễn Thị A</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label for="CRP" class="col-3 col-form-label">Ngày chỉ định:</label>
+                                <label for="CRP" class="col-auto col-form-label bluebold" style="color: dodgerblue; font-weight:bold;">27/06/2022 08:15</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <label for="CRP" class="col-2 col-form-label">Mô tả:</label>
+                                <textarea id="MoTa" class="form-control col-10" rows="6"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <label for="CRP" class="col-2 col-form-label">Kết luận:</label>
+                                <label for="CRP" class="col-auto col-form-label bluebold" style="color: dodgerblue; font-weight:bold;">27/06/2022 08:15</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            @*            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>*@
+        </div>
+    </div>
+</div>
+
+

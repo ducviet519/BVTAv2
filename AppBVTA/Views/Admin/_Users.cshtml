@@ -1,0 +1,74 @@
+﻿@model DataBVTA.Models.ViewModels.PermissionViewModel
+<div class="tab-custom-content">
+    <div class="row">
+        <div class="col"><label class="col-form-label" style="font-size:16px; text-transform:uppercase">Danh sách người dùng</label></div>
+        <div class="col">
+            <a class="btn btn-success float-right" data-toggle="ajax-modal" data-target="#addRoles" data-url="/Roles/CreateRoles"><i class="fa fa-plus"></i> &nbsp Thêm</a>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered table-striped dataTable dtr-inline" width="100%" role="grid" id="tableUsers">
+    <thead>
+        <tr>
+            <th class="text-wrap w-auto">ID</th>
+            <th class="text-wrap w-auto">Tên người dùng</th>
+            <th class="text-wrap w-auto">Tài khoản</th>
+            <th class="text-wrap w-auto">Email</th>
+            <th class="text-wrap w-auto">Trạng thái</th>
+            <th class="text-wrap w-auto">Nhóm</th>
+            <th class="text-wrap w-auto">Phân quyền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model.ListUsers != null && Model.ListUsers.Count > 0)
+            {
+                var count = 0;
+                foreach (var item in Model.ListUsers)
+                {
+                    count = ++count;
+                    <tr>
+                        <td>@count</td>
+                        <td>@item.DisplayName</td>
+                        <td>@item.UserName</td>
+                        <td>@item.Email</td>
+                        <td>
+                            @if (item.Status == true)
+                            {
+                                <span class="badge bg-success">Đang sử dụng</span>
+                            }
+                            else if (item.Status == false)
+                            {
+                                <span class="badge bg-danger">Ngưng sử dụng</span>
+                            }
+                        </td>
+                        <td>
+                            @*@foreach (var roles in Model.UserInRoles)
+                                {
+                                    <span class="badge bg-primary">@roles.RoleName</span>
+                                }*@
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown">
+                                    Phân quyền
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                    <a class="dropdown-item" data-toggle="ajax-modal" data-target="#userRoles-@item.UserID" data-url="/Admin/AddRoleUser?UserID=@item.UserID"><i class="fa fa-share-alt"></i> &nbsp Phân theo nhóm quyền</a>
+                                    <a class="dropdown-item" data-toggle="ajax-modal" data-target="#userRoles-@item.UserID" data-url="/Admin/AddPermissionUser?UserID=@item.UserID"><i class="fa fa-share-alt"></i> &nbsp Phân theo chức năng</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    (function () {
+        document.querySelector('body').addEventListener('scriptsLoaded', function () {
+
+        })();
+</script>

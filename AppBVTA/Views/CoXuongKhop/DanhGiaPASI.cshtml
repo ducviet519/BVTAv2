@@ -1,0 +1,122 @@
+﻿@model DataBVTA.Models.ViewModels.ThongTinBenhNhanVM
+@{
+    ViewData["Title"] = "Phiếu đánh giá PASI";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .btn {
+        display: unset;
+    }
+
+    .nav-sidebar .nav-item > .nav-link {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .nav-sidebar .nav-item:hover {
+        background-color: transparent;
+    }
+
+    .card {
+        border-radius: unset;
+    }
+</style>
+
+<ul class="nav nav-tabs pl-5" id="custom-content-above-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="tab-PhieuKhamBenh" data-toggle="pill" href="#content-PhieuKhamBenh" role="tab" aria-controls="content-PhieuKhamBenh" aria-selected="true">Phiếu khám</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="tab-BieuDo" data-toggle="pill" href="#content-BieuDo" role="tab" aria-controls="content-BieuDo" aria-selected="false">Biểu đồ</a>
+    </li>
+</ul>
+<div class="tab-content pl-3 pr-3" id="custom-content-below-tabContent">
+    <div class="tab-pane fade show active" id="content-PhieuKhamBenh" role="tabpanel" aria-labelledby="content-PhieuKhamBenh">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    @await Component.InvokeAsync("ThongTinHanhChinh", new {mabn = Model.mabn})
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-3 pr-0">
+                            @await Component.InvokeAsync("DanhMuc", new {mabn = Model.mabn})
+                        </div>
+                        <div class="col-9 pl-0">
+                            <!-- /.row -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <form id="myForm" method="post" asp-area="" asp-action="KhamLamSang" asp-controller="CoXuongKhop">
+                                        <div class="card mb-0 ml-0 box-shadow-disable">
+                                            <div class="card-header">
+                                                <h3 class="card-title head-text">Đánh giá PASI</h3>
+                                                <div class="card-tools">
+                                                    <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-edit"></i> Cập nhật thông tin</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body" style="min-height:305px">
+                                                @*<input type="hidden" id="id" name="id" value="@Model.BenhNhan.id" />*@
+                                                <div class="form-group row">
+                                                    <label for="ketQua" class="col-sm-auto col-form-label">Kết quả đánh giá:</label>
+                                                    <div class="col-sm-3 mr-5">
+                                                        <input type="text" class="form-control" id="ketQua">
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-success" id="danhGia">Đánh giá</button>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label for="ketQua" class="col-sm-auto col-form-label mr-2">Kết luận:</label>
+                                                    <label for="ketQua" id="ketLuan" class="col-sm-auto col-form-label">PASI = </label>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                    </form>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="content-BieuDo" role="tabpanel" aria-labelledby="content-BieuDo">
+        @await Html.PartialAsync("_BieuDo")
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#ketQua').inputmask({ alias: 'numeric' });
+        })
+        $('#danhGia').click(function () {
+
+            var ketQua = ((document.getElementById("ketQua") || {}).value) || "";
+
+            if (ketQua === "") {
+                $('#danhGia').callToast("info", "Chú ý", "Hãy kết quả trước khi đánh giá trước khi đánh giá");
+            }
+            else {
+                const ketLuan = document.getElementById('ketLuan');
+
+                if (ketQua < 10) {
+                    ketLuan.innerHTML = "PASI = <strong style='color: MediumSeaGreen;'>" + ketQua + " - Nhẹ</strong>";
+                }
+                else if (ketQua >= 10 && ketQua < 20) {
+                    ketLuan.innerHTML = "PASI = <strong style='color: DodgerBlue;'>" + ketQua + " - Vừa</strong>";
+                }
+                else if (ketQua >= 20) {
+                    ketLuan.innerHTML = "PASI = <strong style='color: Tomato;'>" + ketQua + " - Nặng</strong>";
+                }
+            }
+        })
+    </script>
+}
+
+
