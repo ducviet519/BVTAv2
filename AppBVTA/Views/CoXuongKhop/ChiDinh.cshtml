@@ -172,7 +172,7 @@
         </div>
     </div>
     <div class="tab-pane fade" id="content-BieuDo" role="tabpanel" aria-labelledby="content-BieuDo">
-        @await Html.PartialAsync("_BieuDo")
+        @await Component.InvokeAsync("BieuDo", new {mabn = Model.mabn})
     </div>
 </div>
 
