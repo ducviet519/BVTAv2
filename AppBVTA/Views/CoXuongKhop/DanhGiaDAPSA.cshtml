@@ -36,11 +36,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    @await Component.InvokeAsync("ThongTinHanhChinh", new {mabn = Model.mabn})
+                    @await Component.InvokeAsync("ThongTinHanhChinh", new { mabn = Model.mabn, mavaovien = Model.mavaovien, maql = Model.maql })
                     <!-- /.row -->
                     <div class="row">
                         <div class="col-3 pr-0">
-                            @await Component.InvokeAsync("DanhMuc", new {mabn = Model.mabn})
+                            @await Component.InvokeAsync("DanhMuc", new { mabn = Model.mabn })
                         </div>
                         <div class="col-9 pl-0">
                             <!-- /.row -->
@@ -97,67 +97,67 @@
                                                             <div class="col-form-label col-12">&minus;&nbsp; Trung bình bệnh khớp của bạn hoạt động như thế nào trong tuần trước?</div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD00" name="benhKhopHD" value="0" required/>
+                                                                    <input type="radio" id="benhKhopHD00" name="benhKhopHD" value="0" required />
                                                                     <label for="benhKhopHD00">0</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD01" name="benhKhopHD" value="1"/>
+                                                                    <input type="radio" id="benhKhopHD01" name="benhKhopHD" value="1" />
                                                                     <label for="benhKhopHD01">1</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD02" name="benhKhopHD" value="2"/>
+                                                                    <input type="radio" id="benhKhopHD02" name="benhKhopHD" value="2" />
                                                                     <label for="benhKhopHD02">2</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD03" name="benhKhopHD" value="3"/>
+                                                                    <input type="radio" id="benhKhopHD03" name="benhKhopHD" value="3" />
                                                                     <label for="benhKhopHD03">3</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD04" name="benhKhopHD" value="4"/>
+                                                                    <input type="radio" id="benhKhopHD04" name="benhKhopHD" value="4" />
                                                                     <label for="benhKhopHD04">4</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD05" name="benhKhopHD" value="5"/>
+                                                                    <input type="radio" id="benhKhopHD05" name="benhKhopHD" value="5" />
                                                                     <label for="benhKhopHD05">5</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD06" name="benhKhopHD" value="6"/>
+                                                                    <input type="radio" id="benhKhopHD06" name="benhKhopHD" value="6" />
                                                                     <label for="benhKhopHD06">6</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD07" name="benhKhopHD" value="7"/>
+                                                                    <input type="radio" id="benhKhopHD07" name="benhKhopHD" value="7" />
                                                                     <label for="benhKhopHD07">7</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD08" name="benhKhopHD" value="8"/>
+                                                                    <input type="radio" id="benhKhopHD08" name="benhKhopHD" value="8" />
                                                                     <label for="benhKhopHD08">8</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD09" name="benhKhopHD" value="9"/>
+                                                                    <input type="radio" id="benhKhopHD09" name="benhKhopHD" value="9" />
                                                                     <label for="benhKhopHD09">9</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="benhKhopHD10" name="benhKhopHD" value="10"/>
+                                                                    <input type="radio" id="benhKhopHD10" name="benhKhopHD" value="10" />
                                                                     <label for="benhKhopHD10">10</label>
                                                                 </div>
                                                             </div>
@@ -166,7 +166,7 @@
                                                             <div class="col-form-label col-12">&minus;&nbsp;Bạn mô tả mức độ đau khớp tuần trước?</div>
                                                             <div class="col-auto pr-0">
                                                                 <div class="radio icheck-belizehole">
-                                                                    <input type="radio" id="mucDoDauKhop00" name="mucDoDauKhop" value="0"  required/>
+                                                                    <input type="radio" id="mucDoDauKhop00" name="mucDoDauKhop" value="0" required />
                                                                     <label for="mucDoDauKhop00">0</label>
                                                                 </div>
                                                             </div>

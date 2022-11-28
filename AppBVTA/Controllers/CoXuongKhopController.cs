@@ -49,26 +49,46 @@ namespace AppBVTA.Controllers
 
         #region 2. Đánh giá
 
-        public IActionResult DanhGiaASDAS()
+        public IActionResult DanhGiaASDAS(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
-        public IActionResult DanhGiaDAPSA()
+        public IActionResult DanhGiaDAPSA(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
-        public IActionResult DanhGiaPASI()
+        public IActionResult DanhGiaPASI(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
 
         #endregion
 
         #region 3. Chỉ định
 
-        public IActionResult ChiDinh()
+        public IActionResult ChiDinh(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
         public IActionResult KetQuaChanDoanHinhAnh()
         {
@@ -105,9 +125,14 @@ namespace AppBVTA.Controllers
         #endregion
 
         #region 5. Xử trí
-        public IActionResult XuTri()
+        public IActionResult XuTri(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
         #endregion
     }
