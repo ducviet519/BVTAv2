@@ -8,7 +8,7 @@ namespace DataBVTA.Models.Entities
 {
     public class BacSiModel
     {
-        public string mabs { get; set; }
-        public string tenbs { get; set; }
+        public string ma { get; set; }
+        public string hoten { get; set; }
     }
 }

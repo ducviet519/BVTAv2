@@ -48,7 +48,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    @await Component.InvokeAsync("ThongTinHanhChinh", new {mabn = Model.mabn})
+                    @await Component.InvokeAsync("ThongTinHanhChinh", new {mabn = Model.mabn, mavaovien = Model.mavaovien, maql = Model.maql})
                     <!-- /.row -->
                     <div class="row">
                         <div class="col-3 pr-0">
@@ -116,7 +116,7 @@
         </div>
     </div>
     <div class="tab-pane fade" id="content-BieuDo" role="tabpanel" aria-labelledby="content-BieuDo">
-        @await Html.PartialAsync("_BieuDo")
+        @await Component.InvokeAsync("BieuDo", new { mabn = Model.mabn })
     </div>
 </div>
 

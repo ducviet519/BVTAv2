@@ -9,6 +9,6 @@ namespace DataBVTA.Services.Interfaces
 {
     public interface IThongTinHanhChinhRepository
     {
-        Task<List<ThongTinBenhNhan>> GetThongTinHanhChinh(string mabn);
+        Task<ThongTinBenhNhan> GetThongTinHanhChinh(string mabn, string mavaovien, string maql);
     }
 }

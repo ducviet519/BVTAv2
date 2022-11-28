@@ -8,7 +8,7 @@ namespace DataBVTA.Models.Entities
 {
     public class DieuDuongModel
     {
-        public string madd { get; set; }
-        public string tendd { get; set; }
+        public string ma { get; set; }
+        public string hoten { get; set; }
     }
 }

@@ -17,8 +17,6 @@ namespace AppBVTA.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(string mabn)
         {
             ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
-            model.LichSuKhamBenh = await _services.LichSuKhamBenh.GetLichSuKhamBenh(mabn);
-            model.ThongTinHanhChinh = (await _services.ThongTinHanhChinh.GetThongTinHanhChinh(mabn)).Where(i => i.mabn != null).FirstOrDefault();
             return View(model);
         }
     }

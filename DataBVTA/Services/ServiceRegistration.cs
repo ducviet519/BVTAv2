@@ -16,10 +16,10 @@ namespace DataBVTA.Services
             services.AddTransient<ILoginRepository, LoginRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IChoKhamRepository, ChoKhamRepository>();
-            services.AddTransient<IPhongKhamRepository, PhongKhamRepository>();
             services.AddTransient<ILichSuKhamBenhReponsitory, LichSuKhamBenhReponsitory>();
             services.AddTransient<IPhieuKhamBenhRepository, PhieuKhamBenhRepository>();
             services.AddTransient<IThongTinHanhChinhRepository, ThongTinHanhChinhRepository>();
+            services.AddTransient<IDanhMucRepository, DanhMucRepository>();
             services.AddTransient<IUploadFile, UploadFile>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
