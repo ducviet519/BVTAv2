@@ -60,5 +60,25 @@ namespace AppBVTA.Controllers
             }
         }
 
+        public async Task<JsonResult> Get_ICD_ChanDoan(string icd10 = null, string term = null)
+        {
+            List<ChanDoanModel> list = await _services.DanhMuc.Get_DM_ICD10();
+            if (!String.IsNullOrEmpty(term))
+            {
+
+                var data = list.Where(i => i.CICD10 != null && StaticHelper.convertToUnSign(i.CICD10.ToLower()).IndexOf(StaticHelper.convertToUnSign(term.ToLower())) >= 0 || i.VVIET != null && StaticHelper.convertToUnSign(i.VVIET.ToLower()).IndexOf(StaticHelper.convertToUnSign(term.ToLower())) >= 0).ToList();
+                return Json(new { data });
+            }
+            if (!String.IsNullOrEmpty(icd10) && String.IsNullOrEmpty(term))
+            {
+                var data = list.Where(i => i.CICD10 != null && i.CICD10.Contains(icd10)).FirstOrDefault();
+                return Json(new { data });
+            }
+            else
+            {
+                var data = list;
+                return Json(new { data });
+            }
+        }
     }
 }

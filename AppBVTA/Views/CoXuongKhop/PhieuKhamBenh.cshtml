@@ -806,6 +806,7 @@
 </div>
 
 @section Scripts{
+    <script src="libs/select2-4.0.2-rc.1/dist/js/i18n/<here-goes-language>.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#ngayKham').datetimepicker({ format: 'DD/MM/YYYY', locale: 'vi' });
@@ -870,7 +871,8 @@
                 url: '/DanhMuc/GetBacSi?mabs=' + mabs
             }).then(function (data) {
                 // create the option and append to Select2
-                var option = new Option(data.data.hoten, data.data.ma, true, true);
+                if (data.data.ma == null || data.data.hoten == null) { var option = new Option(null, null, true, true); }
+                else { var option = new Option(data.data.ma + '|' + data.data.hoten, data.data.ma, true, true); }
                 bacSiSelect.append(option).trigger('change');
                 // manually trigger the `select2:select` event
                 bacSiSelect.trigger({
@@ -880,7 +882,6 @@
                     }
                 });
             });
-
 
             $('#DieuDuong').select2({
                 ajax: {
@@ -900,7 +901,8 @@
                                 }
                             })
                         };
-                    }
+                    },
+                    cache: true
                 },
                 placeholder: 'Chọn điều dưỡng',
                 allowClear: true,
@@ -930,7 +932,8 @@
                 url: '/DanhMuc/GetDieuDuong?madd=' + madd
             }).then(function (data) {
                 // create the option and append to Select2
-                var option = new Option(data.data.hoten, data.data.ma, true, true);
+                if (data.data.ma == null || data.data.hoten == null) { var option = new Option(null, null, true, true); }
+                else { var option = new Option(data.data.ma + '|' + data.data.hoten, data.data.ma, true, true); }              
                 dieuDuongSelect.append(option).trigger('change');
                 // manually trigger the `select2:select` event
                 dieuDuongSelect.trigger({
@@ -940,6 +943,68 @@
                     }
                 });
             });
+
+            $('.selectICD').select2({
+                ajax: {
+                    url: '/DanhMuc/Get_ICD_ChanDoan',
+                    dataType: 'json',
+                    data: function (params) {
+                        return {
+                            term: params.term,
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data.data, function (item) {
+                                return {
+                                    text: item.cicD10 + '|' + item.vviet,
+                                    id: item.cicD10
+                                }
+                            }),
+                        };
+                    },
+                    cache: true
+                },
+                placeholder: 'Chọn điều dưỡng',
+                allowClear: true,
+                width: "100%",
+                language: "vi",
+                templateResult: function (option) {
+                    var item = option.text.split('|');
+                    var ob = jQuery(
+                        '<div class="row justify-content-between">' +
+                        '<div class="col-1">' + item[0] + '</div>' +
+                        '<div class="col-11 text-wrap">' + item[1] + '</div>' +
+                        '</div>');
+                    return ob;
+                },
+                templateSelection: function (option) {
+                    var item = option.text.split('|');
+                    return item[1];
+                },
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            var dieuDuongSelect = $('#ChanDoanICD');
+            var icd10 = ((document.getElementById("selectedICD") || {}).value)
+            $.ajax({
+                type: 'GET',
+                url: '/DanhMuc/Get_ICD_ChanDoan?icd10=' + icd10
+            }).then(function (data) {
+                // create the option and append to Select2
+                if (data.data.ma == null || data.data.hoten == null) { var option = new Option(null, null, true, true); }
+                else { var option = new Option(data.data.cicD10 + '|' + data.data.vviet, data.data.cicD10, true, true); }
+                dieuDuongSelect.append(option).trigger('change');
+                // manually trigger the `select2:select` event
+                dieuDuongSelect.trigger({
+                    type: 'select2:select',
+                    params: {
+                        data: data
+                    }
+                });
+            });
+
             $(document).on('select2:open', function (e) {
                 window.setTimeout(function () {
                     document.querySelector('input.select2-search__field').focus();

@@ -80,3 +80,7 @@
     .tree details[open] > summary::before {
         content: '−';
     }
+
+.tree summary a * {
+    pointer-events: none;
+}
