@@ -32,23 +32,18 @@ namespace DataBVTA.Services.Repositories
         #endregion
 
         //sp_phieukham__lichsukhambenh
-        public async Task<List<LichSuKhamBenh>> GetLichSuKhamBenh(string mabn, string ngaykham = null, string maql = null, string thang = null)
+        public async Task<List<LichSuKhamBenh>> GetLichSuKhamBenh(string mabn)
         {
-            DateTime ngaykhamD = new DateTime();
-            //if (!String.IsNullOrEmpty(ngaykham)) { ngaykhamD = Convert.ToDateTime(ngaykham, CultureInfo.InvariantCulture); }
             List<LichSuKhamBenh> data = new List<LichSuKhamBenh>();
             try
             {
                 using (IDbConnection dbConnection = Connection)
                 {
                     dbConnection.Open();
-                    data = (await dbConnection.QueryAsync<LichSuKhamBenh>("sp_phieukham__lichsukhambenh",
+                    data = (await dbConnection.QueryAsync<LichSuKhamBenh>("sp_HIS_LichSuKham",
                         new
                         {
                             mabn = mabn,
-                            ngaykham = ngaykham,
-                            maql = maql,
-                            thang = thang
                         }, commandType: CommandType.StoredProcedure)).ToList();
                     dbConnection.Close();
                 }

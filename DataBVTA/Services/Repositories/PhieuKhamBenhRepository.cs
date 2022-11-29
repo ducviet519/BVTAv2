@@ -31,7 +31,7 @@ namespace DataBVTA.Services.Repositories
 
         #endregion
         //sp_phieukham__thongtinphieu
-        public async Task<List<PhieuKhamBenh>> GetPhieuKhamBenh(string mabn = null, string mavaovien = null, string maql = null, string thang = null)
+        public async Task<List<PhieuKhamBenh>> Get_PhieuKham_TrieuChung(string mabn, string mavaovien, string maql)
         {
             List<PhieuKhamBenh> data = new List<PhieuKhamBenh>();
             try
@@ -39,13 +39,37 @@ namespace DataBVTA.Services.Repositories
                 using (IDbConnection dbConnection = Connection)
                 {
                     dbConnection.Open();
-                    data = (await dbConnection.QueryAsync<PhieuKhamBenh>("sp_phieukham__thongtinphieu",
+                    data = (await dbConnection.QueryAsync<PhieuKhamBenh>("sp_phieukham_trieuchung",
                         new
                         {
                             mabn = mabn,
                             mavaovien = mavaovien,
                             maql = maql,
-                            thang = thang
+                        }, commandType: CommandType.StoredProcedure)).ToList();
+                    dbConnection.Close();
+                }
+                return data;
+            }
+            catch (Exception ex)
+            {
+                string errorMsg = ex.Message;
+                return data;
+            }
+        }
+        public async Task<List<PhieuKhamBenh>> Get_PhieuKham_TienSuThuoc(string mabn, string mavaovien, string maql)
+        {
+            List<PhieuKhamBenh> data = new List<PhieuKhamBenh>();
+            try
+            {
+                using (IDbConnection dbConnection = Connection)
+                {
+                    dbConnection.Open();
+                    data = (await dbConnection.QueryAsync<PhieuKhamBenh>("sp_phieukham_tiensuthuoc",
+                        new
+                        {
+                            mabn = mabn,
+                            mavaovien = mavaovien,
+                            maql = maql,
                         }, commandType: CommandType.StoredProcedure)).ToList();
                     dbConnection.Close();
                 }

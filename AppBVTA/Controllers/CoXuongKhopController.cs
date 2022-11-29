@@ -21,64 +21,74 @@ namespace AppBVTA.Controllers
             _services = services;
         }
 
-        #region Thông tin chung của bệnh nhân
-        
-        public IActionResult DanhMuc()
-        {
-            return PartialView("_DanhMuc");
-        }
-        public IActionResult BieuDo()
-        {
-            return PartialView("_BieuDo");
-        }
-
-        #endregion
-
         #region 1. Khám lâm sàng
 
-        public async Task<IActionResult> PhieuKhamBenh(string mabn, string maphongkham)
+        public async Task<IActionResult> PhieuKhamBenh(string mabn, string mavaovien, string maql)
         {
-            mabn = "88888888";
+            if(String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
             ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
-            model.LichSuKhamBenh = await _services.LichSuKhamBenh.GetLichSuKhamBenh(mabn);
-            model.ThongTinHanhChinh = (await _services.ThongTinHanhChinh.GetThongTinHanhChinh(mabn)).Where(i => i.mabn != null).FirstOrDefault();
-            //string mavaovien = (await _services.LichSuKhamBenh.GetLichSuKhamBenh(mabn))
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            model.ThongTinHanhChinh = await _services.ThongTinHanhChinh.GetThongTinHanhChinh(mabn, mavaovien, maql);
+            model.PhieuKham_TienSuThuoc = await _services.PhieuKhamBenh.Get_PhieuKham_TienSuThuoc(mabn, mavaovien, maql);
+            model.PhieuKham_TrieuChung = await _services.PhieuKhamBenh.Get_PhieuKham_TrieuChung(mabn, mavaovien, maql);
+
+            //model.DanhMuc_TenBacSi = new SelectList((await _services.DanhMuc.Get_DM_BacSi()).Select(s => new { ma = s.ma, hoten = $"{s.ma} | {s.hoten}"}).ToList(), "ma", "hoten");
+            model.DanhMuc_TenBacSi = new SelectList(await _services.DanhMuc.Get_DM_BacSi(), "ma", "hoten");
+            model.DanhMuc_MaBacSi = new SelectList(await _services.DanhMuc.Get_DM_BacSi(), "ma", "ma");
+            //model.DanhMuc_TenDieuDuong = new SelectList((await _services.DanhMuc.Get_DM_DieuDuong()).Select(s => new { ma = s.ma, hoten = $"{s.ma} | {s.hoten}" }).ToList(), "ma", "hoten");
+            model.DanhMuc_TenDieuDuong = new SelectList(await _services.DanhMuc.Get_DM_DieuDuong(), "ma", "hoten");
+            model.DanhMuc_MaDieuDuong = new SelectList(await _services.DanhMuc.Get_DM_DieuDuong(), "ma", "ma");
+            model.DanhMuc_TenICD = new SelectList(await _services.DanhMuc.Get_DM_ICD10(), "CICD10", "VVIET");
+            model.DanhMuc_MaICD = new SelectList(await _services.DanhMuc.Get_DM_ICD10(), "CICD10", "CICD10");
             return View(model);
-        }
-       
-        [HttpGet]
-        public async Task<IActionResult> KhamLamSang(string mabn)
-        {
-            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
-            model.LichSuKhamBenh = await _services.LichSuKhamBenh.GetLichSuKhamBenh(mabn);
-            model.ThongTinHanhChinh = (await _services.ThongTinHanhChinh.GetThongTinHanhChinh(mabn)).Where(i => i.mabn != null).FirstOrDefault();
-            return PartialView("_PhieuKhamBenh_KhamLamSang", model);
         }
 
         #endregion
 
         #region 2. Đánh giá
 
-        public IActionResult DanhGiaASDAS()
+        public IActionResult DanhGiaASDAS(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
-        public IActionResult DanhGiaDAPSA()
+        public IActionResult DanhGiaDAPSA(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
-        public IActionResult DanhGiaPASI()
+        public IActionResult DanhGiaPASI(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
 
         #endregion
 
         #region 3. Chỉ định
 
-        public IActionResult ChiDinh()
+        public IActionResult ChiDinh(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
         public IActionResult KetQuaChanDoanHinhAnh()
         {
@@ -95,9 +105,14 @@ namespace AppBVTA.Controllers
         #endregion
 
         #region 4. Danh sách đơn thuốc
-        public IActionResult DanhSachDonThuoc()
+        public IActionResult DanhSachDonThuoc(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
         public IActionResult ThemMoiDonThuoc()
         {
@@ -110,9 +125,14 @@ namespace AppBVTA.Controllers
         #endregion
 
         #region 5. Xử trí
-        public IActionResult XuTri()
+        public IActionResult XuTri(string mabn, string mavaovien, string maql)
         {
-            return View();
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
+            return View(model);
         }
         #endregion
     }

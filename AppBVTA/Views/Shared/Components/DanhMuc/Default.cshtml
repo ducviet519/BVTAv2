@@ -61,8 +61,13 @@
                     tags: ['0']
                 }
             ];
-
-            $(this).callTreeView('#DanhMuc', danhmucTree, 2)
+            $('#DanhMuc').treeview({
+                data: danhmucTree,
+                enableLinks: true,
+                collapseIcon: 'fas fa-minus',
+                expandIcon: 'fas fa-plus'
+            });
+           
         });
     })();
 </script>

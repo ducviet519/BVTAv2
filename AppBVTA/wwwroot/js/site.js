@@ -69,18 +69,16 @@ $.fn.callToast = function (status, title, msg) {
     }
 }
 
-$.fn.callTreeView = function (id, data, level, showBorder) {
-    if (showBorder === "" || showBorder === null || showBorder === "1" || showBorder === 1) { showBorder = true; }
-    else if (showBorder === "0" || showBorder === 0) { showBorder = false;}
-    $(id).treeview({
-        data: data,
-        enableLinks: true,
-        showBorder: showBorder,
-        showTags: false,
-        levels: level,
-        collapseIcon: 'fas fa-minus',
-        expandIcon: 'fas fa-plus'
+$.fn.callTreeView = function (id, url) {
+    $.getJSON(url, function (data) {
+        $(id).treeview({
+            data: data,
+            enableLinks: true,
+            collapseIcon: 'fas fa-minus',
+            expandIcon: 'fas fa-plus'
+        });
     });
+    
 }
 
 //Test Export trong trường hợp không truyền exportColumn
@@ -383,6 +381,50 @@ function searchDataTable(id, columnData, url, pageLength, disableColumn) {
                 "sLast": "Cuối"
             }
         },
+    });
+}
+
+$.fn.callSelect2 = function (id, url, placeholder) {
+    $(id).select2({
+        ajax: {
+            url: url,
+            dataType: 'json',
+            data: function (params) {
+                return {
+                    term: params.term,
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: $.map(data.data, function (item) {
+                        return {
+                            text: item.ma + '|' + item.hoten,
+                            id: item.ma
+                        }
+                    })
+                };
+            }
+        },
+        placeholder: placeholder,
+        allowClear: true,
+        width: "100%",
+        language: "vi",
+        templateResult: function (option) {
+            var item = option.text.split('|');
+            var ob = jQuery(
+                '<div class="row justify-content-between">' +
+                '<div class="col-3">' + item[0] + '</div>' +
+                '<div class="col-9 text-wrap">' + item[1] + '</div>' +
+                '</div>');
+            return ob;
+        },
+        templateSelection: function (option) {
+            var item = option.text.split('|');
+            return item[1];
+        },
+        escapeMarkup: function (m) {
+            return m;
+        }
     });
 }
 

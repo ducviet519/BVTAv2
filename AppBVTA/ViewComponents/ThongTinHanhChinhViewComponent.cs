@@ -1,8 +1,13 @@
-﻿using DataBVTA.Models.ViewModels;
+﻿using DataBVTA.Models.Entities;
+using DataBVTA.Models.ViewModels;
 using DataBVTA.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
+using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
+using Newtonsoft.Json;
 
 namespace AppBVTA.ViewComponents
 {
@@ -14,12 +19,16 @@ namespace AppBVTA.ViewComponents
         {
             _services = services;
         }
-        public async Task<IViewComponentResult> InvokeAsync(string mabn)
+        public async Task<IViewComponentResult> InvokeAsync(string mabn, string mavaovien, string maql)
         {
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
             ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
+            model.mabn = mabn;
+            model.mavaovien = mavaovien;
+            model.maql = maql;
             model.LichSuKhamBenh = await _services.LichSuKhamBenh.GetLichSuKhamBenh(mabn);
-            model.ThongTinHanhChinh = (await _services.ThongTinHanhChinh.GetThongTinHanhChinh(mabn)).Where(i => i.mabn != null).FirstOrDefault();
+            model.ThongTinHanhChinh = await _services.ThongTinHanhChinh.GetThongTinHanhChinh(mabn, mavaovien, maql);
             return View(model);
-        }
+        }        
     }
 }

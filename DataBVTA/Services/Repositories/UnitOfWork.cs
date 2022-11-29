@@ -12,29 +12,29 @@ namespace DataBVTA.Services.Repositories
         public ILoginRepository Permission { get; }
         public IProductRepository Products { get; }
         public IChoKhamRepository DanhSachChoKham { get; }
-        public IPhongKhamRepository PhongKham { get; }
         public ILichSuKhamBenhReponsitory LichSuKhamBenh { get; }
         public IThongTinHanhChinhRepository ThongTinHanhChinh { get; }
         public IPhieuKhamBenhRepository PhieuKhamBenh { get; }
+        public IDanhMucRepository DanhMuc { get; }
 
         public UnitOfWork
             (
                 ILoginRepository loginRepository,
                 IProductRepository productRepository,
                 IChoKhamRepository choKhamRepository,
-                IPhongKhamRepository phongKhamRepository,
                 ILichSuKhamBenhReponsitory lichSuKhamBenhReponsitory,
                 IThongTinHanhChinhRepository thongTinHanhChinhRepository,
-                IPhieuKhamBenhRepository phieuKhamBenhRepository
+                IPhieuKhamBenhRepository phieuKhamBenhRepository,
+                IDanhMucRepository danhMucRepository
             )
         {
             Permission = loginRepository;
             Products = productRepository;
             DanhSachChoKham = choKhamRepository;
-            PhongKham = phongKhamRepository;
             LichSuKhamBenh = lichSuKhamBenhReponsitory;
             ThongTinHanhChinh = thongTinHanhChinhRepository;
             PhieuKhamBenh = phieuKhamBenhRepository;
+            DanhMuc = danhMucRepository;
         }
         
     }

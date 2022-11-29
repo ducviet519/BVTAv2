@@ -9,6 +9,7 @@ namespace DataBVTA.Services.Interfaces
 {
     public interface IPhieuKhamBenhRepository
     {
-        Task<List<PhieuKhamBenh>> GetPhieuKhamBenh(string mabn = null, string mavaovien = null, string maql = null, string thang = null);
+        Task<List<PhieuKhamBenh>> Get_PhieuKham_TrieuChung(string mabn, string mavaovien, string maql);
+        Task<List<PhieuKhamBenh>> Get_PhieuKham_TienSuThuoc(string mabn, string mavaovien, string maql);
     }
 }

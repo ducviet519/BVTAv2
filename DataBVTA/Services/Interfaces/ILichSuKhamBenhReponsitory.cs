@@ -9,6 +9,6 @@ namespace DataBVTA.Services.Interfaces
 {
     public interface ILichSuKhamBenhReponsitory
     {
-        Task<List<LichSuKhamBenh>> GetLichSuKhamBenh(string mabn, string ngaykham = null, string maql = null, string thang = null);
+        Task<List<LichSuKhamBenh>> GetLichSuKhamBenh(string mabn);
     }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataBVTA.Models.Entities
 {
-    public class ChanDoanModel
+    public class TreeView
     {
-        public string CICD10 { get; set; }
-        public string VVIET { get; set; }
-        public string ID { get; set; }
+        public string text { get; set; }
+        public string href { get; set; }
+        public List<TreeView> nodes { get; set; }
     }
 }

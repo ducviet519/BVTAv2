@@ -21,14 +21,14 @@ namespace AppBVTA.Controllers
         public async Task<IActionResult> TongQuanKhamBenh()
         {
             DanhSachDangKyKhamBenh model = new DanhSachDangKyKhamBenh();
-            model.PhongKham = new SelectList(await _services.PhongKham.DanhSachPhongKhamAsync(), "makp", "tenkp");
+            model.PhongKham = new SelectList(await _services.DanhMuc.Get_DM_PhongKham(), "makp", "tenkp");
             return View(model);
         }
 
         [HttpGet]
         public async Task<JsonResult> GetDanhSachChoKham(string param, string ngayKham, string phongKham, string mabn)
         {
-            var danhSachPK = await _services.PhongKham.DanhSachPhongKhamAsync();
+            var danhSachPK = await _services.DanhMuc.Get_DM_PhongKham();
             List<string> maPK = new List<string>();
             foreach (var pk in danhSachPK)
             {

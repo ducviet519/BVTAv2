@@ -32,33 +32,33 @@
                     <div class="col-3 pr-0">
                         <div id="DanhMucPhongKham" class="treeview scrollspy-phongkham" data-spy="scroll" data-target="#spy">
                             <ul class="tree pl-0">
-                                <li>
-                                    <details open>
-                                        <summary>Phòng khám</summary>
-                                        <ul>
-                                            @{
-                                                if (Model.LichSuKhamBenh.Count > 0)
-                                                {
-                                                    foreach (var item in Model.LichSuKhamBenh)
+                                    <li>
+                                        <details open>
+                                            <summary>Phòng khám</summary>
+                                            <ul>
+                                                @{
+                                                    if (Model.LichSuKhamBenh.Count > 0)
                                                     {
-                                                        <li>
-                                                            <details>
-                                                                <summary>@item.ngaykham @item.tenkhoaphong</summary>
-                                                                <ul>
-                                                                    <li>Bác sĩ: @item.tenbacsi</li>
-                                                                    <li>Chẩn đoán: @item.chandoan</li>
-                                                                    <li>Giới tính: @item.gioitinh</li>
-                                                                    <li>Ngày khám: @item.ngaykham</li>
-                                                                </ul>
-                                                            </details>
-                                                        </li>
+                                                        foreach (var item in Model.LichSuKhamBenh)
+                                                        {
+                                                            <li>
+                                                                <details>
+                                                                    <summary><a href="/CoXuongKhop/PhieuKhamBenh?mabn=@item.mabn&mavaovien=@item.mavaovien&maql=@item.maql">@item.ngaykham.ToString("dd/MM/yyyy HH:mm") @item.tenkp</a></summary>
+                                                                    @*<ul>
+                                                                        <li>Bác sĩ:</li>
+                                                                        <li>Chẩn đoán:</li>
+                                                                        <li>Giới tính:</li>
+                                                                        <li>Ngày khám:</li>
+                                                                    </ul>*@
+                                                                </details>
+                                                            </li>
+                                                        }
                                                     }
                                                 }
-                                            }
-                                        </ul>
-                                    </details>
-                                </li>
-                            </ul>
+                                            </ul>
+                                        </details>
+                                    </li>
+                                </ul>
                         </div>
                     </div>
                     <div class="col-9 pl-3">
@@ -68,61 +68,6 @@
                             <label class="col-form-label col-3">Ngày sinh: @Model.ThongTinHanhChinh.ngaysinh</label>
                             <label class="col-form-label col-3">Giới tính: @Model.ThongTinHanhChinh.gioitinh</label>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-3">
-                                <div class="form-group form-group-sm row">
-                                    <label for="NguoiDanhGia" class="col-form-label col-auto">Ngày khám:</label>
-                                    <div class="col-7">
-                                        <input type="text" id="ngayKham" name="ngayKham" class="form-control datetimepicker-input ngayKham" data-toggle="datetimepicker" data-target="#ngayKham" value="@Model.ThongTinHanhChinh.ngaykham" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group row">
-                                    <label for="NguoiDanhGia" class="col-form-label col-auto">Giờ khám:</label>
-                                    <div class="col-6">
-                                        <input type="text" id="gioKham" name="gioKham" class="form-control datetimepicker-input gioKham" data-toggle="datetimepicker" data-target="#gioKham" value="@Model.ThongTinHanhChinh.ngaykham" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group row">
-                                    <label for="NguoiDanhGia" class="col-form-label col-auto">Đối tượng: @Model.ThongTinHanhChinh.doituong</label>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group row">
-                                    <label for="NguoiDanhGia" class="col-form-label col-auto">Phòng khám: @Model.ThongTinHanhChinh.tenkhoaphong</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label for="BacSi" class="col-form-label col-auto">Bác sĩ:</label>
-                                   
-                                    <div class="col-8">
-                                        <select disabled>
-                                            <option value="@Model.ThongTinHanhChinh.mabacsi">@Model.ThongTinHanhChinh.tenbacsi</option>
-                                        </select>
-                                        @*<select class="form-control" id="BacSi" name="BacSi"></select>*@
-                                        <input type="hidden" id="selectedBacSi" name="selectedBacSi" value="001" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label for="DieuDuong" class="col-form-label col-auto">Điều dưỡng:</label>
-                                    <div class="col-8">
-                                        <select disabled>
-                                            <option value="@Model.ThongTinHanhChinh.madieuduong">@Model.ThongTinHanhChinh.tendieuduong</option>
-                                        </select>
-                                        @*<select class="form-control" id="DieuDuong" name="DieuDuong"></select>*@
-                                        <input type="hidden" id="selectedDieuDuong" name="selectedDieuDuong" value="002" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -131,144 +76,15 @@
         <!-- /.card -->
     </div>
 </div>
+<input type="hidden" id="MaBN" value="@Model.mabn" />
 <!-- /.row -->
-
 <script type="text/javascript">
-    (function () {
-        document.querySelector('body').addEventListener('scriptsLoaded', function () {
+    $(function () {
+        $('#ngayKham').datetimepicker({ format: 'DD/MM/YYYY', locale: 'vi' });
+        $('#gioKham').datetimepicker({ format: 'HH:mm' });
 
-            $(function () {
-                $('#ngayKham').datetimepicker({ format: 'DD/MM/YYYY', locale: 'vi' });
-                $('#gioKham').datetimepicker({ format: 'HH:mm' });
-            })
-            var phongkhamTree = [
-                {
-                    text: 'Phòng khám',
-                    href: '#',
-                    tags: ['3'],
-                    nodes: [
-                        {
-                            text: '10/01/2022 Phòng khám CXK 01',
-                            href: '#',
-                            tags: ['0'],
-                        },
-                        {
-                            text: '10/01/2022 Phòng khám CXK 01',
-                            href: '#',
-                            tags: ['3'],
-                            nodes: [
-                                {
-                                    text: '10/01/2022 Phòng khám CXK 01',
-                                    href: '#',
-                                    tags: ['0'],
-                                },
-                                {
-                                    text: '10/01/2022 Phòng khám CXK 01',
-                                    href: '#',
-                                    tags: ['0']
-                                },
-                                {
-                                    text: '10/01/2022 Phòng khám CXK 01',
-                                    href: '#',
-                                    tags: ['0']
-                                },
-                            ]
-                        },
-                        {
-                            text: '10/01/2022 Phòng khám CXK 01',
-                            href: '#',
-                            tags: ['0']
-                        },
-                    ]
-                },
-            ];
-
-            $(this).callTreeView('#DanhMucPhongKham', phongkhamTree, 2, 0);
-            $('[data-spy="scroll"]').scrollspy({ target: '#DanhMucPhongKham' });
-
-            $('#BacSi').select2({
-                ajax: {
-                    url: '/BenhNhan/GetBacSi',
-                    dataType: 'json',
-                    data: function (params) {
-                        return {
-                            term: params.term,
-                        }
-                    },
-                    processResults: function (data, params) {
-                        return {
-                            results: $.map(data.data, function (item) {
-                                return {
-                                    id: item.mabs,
-                                    text: item.mabs + ' | ' + item.tenbs,
-                                }
-                            })
-                        };
-                    },
-                    cache: true
-                },
-                placeholder: 'Chọn bác sĩ',
-                allowClear: true
-            });
-            var bacSiSelect = $('#BacSi');
-            var mabs = ((document.getElementById("selectedBacSi") || {}).value)
-            $.ajax({
-                type: 'GET',
-                url: '/BenhNhan/GetBacSi?mabs=' + mabs
-            }).then(function (data) {
-                // create the option and append to Select2
-                var option = new Option(data.data.mabs + ' | ' + data.data.tenbs, data.data.mabs, true, true);
-                bacSiSelect.append(option).trigger('change');
-                // manually trigger the `select2:select` event
-                bacSiSelect.trigger({
-                    type: 'select2:select',
-                    params: {
-                        data: data
-                    }
-                });
-            });
-
-            $('#DieuDuong').select2({
-                ajax: {
-                    url: '/BenhNhan/GetDieuDuong',
-                    dataType: 'json',
-                    data: function (params) {
-                        return {
-                            term: params.term,
-                        };
-                    },
-                    processResults: function (data) {
-                        return {
-                            results: $.map(data.data, function (item) {
-                                return {
-                                    text: item.madd + ' | ' + item.tendd,
-                                    id: item.madd
-                                }
-                            })
-                        };
-                    }
-                },
-                placeholder: 'Chọn điều dưỡng',
-                allowClear: true
-            });
-            var dieuDuongSelect = $('#DieuDuong');
-            var madd = ((document.getElementById("selectedDieuDuong") || {}).value)
-            $.ajax({
-                type: 'GET',
-                url: '/BenhNhan/GetDieuDuong?madd=' + madd
-            }).then(function (data) {
-                // create the option and append to Select2
-                var option = new Option(data.data.madd + ' | ' + data.data.tendd, data.data.madd, true, true);
-                dieuDuongSelect.append(option).trigger('change');
-                // manually trigger the `select2:select` event
-                dieuDuongSelect.trigger({
-                    type: 'select2:select',
-                    params: {
-                        data: data
-                    }
-                });
-            });
-
-        });
-    })();
+        var mabn = (document.getElementById("MaBN") || {}).value
+        $('[data-spy="scroll"]').scrollspy({ target: '#DanhMucPhongKham' });
+    })
 </script>
+

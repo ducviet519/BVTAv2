@@ -31,20 +31,22 @@ namespace DataBVTA.Services.Repositories
 
         #endregion
         //sp_phieukham__thongtinhanhchinh
-        public async Task<List<ThongTinBenhNhan>> GetThongTinHanhChinh(string mabn)
+        public async Task<ThongTinBenhNhan> GetThongTinHanhChinh(string mabn, string mavaovien, string maql)
         {
 
-            List<ThongTinBenhNhan> data = new List<ThongTinBenhNhan>();
+            ThongTinBenhNhan data = new ThongTinBenhNhan();
             try
             {
                 using (IDbConnection dbConnection = Connection)
                 {
                     dbConnection.Open();
-                    data = (await dbConnection.QueryAsync<ThongTinBenhNhan>("sp_phieukham__thongtinhanhchinh",
+                    data = (await dbConnection.QueryFirstOrDefaultAsync<ThongTinBenhNhan>("sp_phieukham_thongtinchinh",
                         new
                         {
                             mabn = mabn,
-                        }, commandType: CommandType.StoredProcedure)).ToList();
+                            mavaovien = mavaovien,
+                            maql = maql,
+                        }, commandType: CommandType.StoredProcedure));
                     dbConnection.Close();
                 }
                 return data;

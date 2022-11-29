@@ -16,7 +16,6 @@ namespace DataBVTA.Models.Entities
         public int cls { get; set; }
         public int coketqua { get; set; }
         public int dakham { get; set; }
-
         public string giodk { get; set; }
         public string mabn { get; set; }
         public string hoten { get; set; }
@@ -24,6 +23,11 @@ namespace DataBVTA.Models.Entities
         public string giohen { get; set; }
         public string tenchidinh { get; set; }
         public string ghichu { get; set; }
-
+        public string mavaovien { get; set; }
+        public string maql { get; set; }
+        public string madoituong { get; set; }
+        public string sovaovien { get; set; }
+        public string phai { get; set; }
+        public string tendoiduong { get; set; }
     }
 }

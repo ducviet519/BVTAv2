@@ -11,9 +11,9 @@ namespace DataBVTA.Services.Interfaces
         ILoginRepository Permission { get; }
         IProductRepository Products { get; }
         IChoKhamRepository DanhSachChoKham { get; }
-        IPhongKhamRepository PhongKham { get; }
         ILichSuKhamBenhReponsitory LichSuKhamBenh { get; }
         IThongTinHanhChinhRepository ThongTinHanhChinh { get; }
         IPhieuKhamBenhRepository PhieuKhamBenh { get; }
+        IDanhMucRepository DanhMuc { get; }
     }
 }
