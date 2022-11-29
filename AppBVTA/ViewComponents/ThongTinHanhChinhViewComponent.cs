@@ -21,7 +21,7 @@ namespace AppBVTA.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync(string mabn, string mavaovien, string maql)
         {
-            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "221128002601722353"; }
+            if (String.IsNullOrEmpty(mabn)) { mabn = "16000569"; mavaovien = "190705081307149525"; maql = "190705082253138551"; }
             ThongTinBenhNhanVM model = new ThongTinBenhNhanVM();
             model.mabn = mabn;
             model.mavaovien = mavaovien;

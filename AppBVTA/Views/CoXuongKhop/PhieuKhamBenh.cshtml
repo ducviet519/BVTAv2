@@ -43,6 +43,52 @@
         padding-right: 7.5px;
     }
 
+    .col-50 {
+        width: 50px;
+        text-align: center !important;
+    }
+
+    .col-40 {
+        width: 40px;
+        text-align: center !important;
+    }
+
+    .col-100 {
+        width: 100px;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+        text-align: center !important;
+    }
+
+    .col-115 {
+        width: 115px;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+        text-align: center !important;
+    }
+
+    .col-125 {
+        width: 125px;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+        text-align: center !important;
+    }
+
+    .col-155 {
+        width: 155px;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+        text-align: center !important;
+    }
+
+
+    .col-135 {
+        width: 135px;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+        text-align: center !important;
+    }
+
     .pr-30 {
         padding-right: 30px;
     }
@@ -100,7 +146,7 @@
                                                         <div class="form-group form-group-sm row">
                                                             <label for="NguoiDanhGia" class="col-form-label col-auto">Ngày khám:</label>
                                                             <div class="col-7">
-                                                                <input type="text" id="ngayKham" name="ngayKham" class="form-control datetimepicker-input ngayKham" data-toggle="datetimepicker" data-target="#ngayKham" value="" />
+                                                                <input type="text" id="ngayKham" name="ngayKham" class="form-control datetimepicker-input ngayKham" data-toggle="datetimepicker" data-target="#ngayKham" value="@Model.ThongTinHanhChinh.ngaykham" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -108,18 +154,18 @@
                                                         <div class="form-group row">
                                                             <label for="NguoiDanhGia" class="col-form-label col-auto">Giờ khám:</label>
                                                             <div class="col-6">
-                                                                <input type="text" id="gioKham" name="gioKham" class="form-control datetimepicker-input gioKham" data-toggle="datetimepicker" data-target="#gioKham" value="" />
+                                                                <input type="text" id="gioKham" name="gioKham" class="form-control datetimepicker-input gioKham" data-toggle="datetimepicker" data-target="#gioKham" value="@Model.ThongTinHanhChinh.ngaykham" />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
                                                         <div class="form-group row">
-                                                            <label for="NguoiDanhGia" class="col-form-label col-auto">Đối tượng: </label>
+                                                            <label for="NguoiDanhGia" class="col-form-label col-auto">Đối tượng: @Model.ThongTinHanhChinh.doituong</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
                                                         <div class="form-group row">
-                                                            <label for="NguoiDanhGia" class="col-form-label col-auto">Phòng khám: </label>
+                                                            <label for="NguoiDanhGia" class="col-form-label col-auto">Phòng khám: @Model.ThongTinHanhChinh.tenkhoaphong</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -144,68 +190,68 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-2">
+                                                    <div class="col-135">
                                                         <div class="form-group row">
-                                                            <label for="Mach" class="col-form-label col-auto pl-0 pr-0">Mạch:</label>
-                                                            <div class="col pl-0 pr-0">
-                                                                <input type="text" id="Mach" name="Mach" class="form-control" />
+                                                            <label for="Mach" class="col-form-label col-auto">Mạch:</label>
+                                                            <div class="col-50">
+                                                                <input type="text" id="Mach" name="Mach" class="form-control" value="@Model.ThongTinHanhChinh.mach" />
                                                             </div>
-                                                            <label for="Mach" class="col-form-label col-auto pl-0 pr-2">1/p</label>
+                                                            <label for="Mach" class="col-form-label col-auto">1/p</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-1">
+                                                    <div class="col-115">
                                                         <div class="form-group row">
-                                                            <label for="NhietDo" class="col-form-label col-auto pl-0 pr-0">T*:</label>
-                                                            <div class="col pl-0 pr-0">
-                                                                <input type="text" id="NhietDo" name="NhietDo" class="form-control" />
+                                                            <label for="NhietDo" class="col-form-label col-auto">T*:</label>
+                                                            <div class="col-50">
+                                                                <input type="text" id="NhietDo" name="NhietDo" class="form-control" value="@Model.ThongTinHanhChinh.nhietdo" />
                                                             </div>
-                                                            <label for="NhietDo" class="col-form-label col-auto pl-0">*C</label>
+                                                            <label for="NhietDo" class="col-form-label col-auto">*C</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-2">
+                                                    <div class="col-135">
                                                         <div class="form-group row">
-                                                            <label for="HA" class="col-form-label col-auto pl-0 pr-0">HA:</label>
-                                                            <div class="col pl-0 pr-0">
-                                                                <input type="text" id="HA" name="HA" class="form-control" />
+                                                            <label for="HA" class="col-form-label col-auto">HA:</label>
+                                                            <div class="col-40">
+                                                                <input type="text" id="HA" name="HA" class="form-control" value="@Model.ThongTinHanhChinh.huyetaptren" />
                                                             </div>
-                                                            <label for="HA2" class="col-form-label col-auto pl-0 pr-0">/</label>
-                                                            <div class="col pl-0">
-                                                                <input type="text" id="HA2" name="HA2" class="form-control" />
+                                                            <label for="HA" class="col-form-label col-auto p-0">/</label>
+                                                            <div class="col-40">
+                                                                <input type="text" id="HA2" name="HA2" class="form-control" value="@Model.ThongTinHanhChinh.huyetapduoi" />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-2">
+                                                    <div class="col-155">
                                                         <div class="form-group row">
-                                                            <label for="NhipTho" class="col-form-label col-auto pl-0 pr-0">Nhịp thở:</label>
-                                                            <div class="col pl-0 pr-0">
-                                                                <input type="text" id="NhipTho" name="NhipTho" class="form-control" />
+                                                            <label for="NhipTho" class="col-form-label col-auto">Nhịp thở:</label>
+                                                            <div class="col-40">
+                                                                <input type="text" id="NhipTho" name="NhipTho" class="form-control" value="@Model.ThongTinHanhChinh.nhiptho" />
                                                             </div>
-                                                            <label for="NhipTho" class="col-form-label col-auto pl-0">1/p</label>
+                                                            <label for="NhipTho" class="col-form-label col-auto">1/p</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-2">
+                                                    <div class="col-125">
                                                         <div class="form-group row">
-                                                            <label for="ChieuCao" class="col-form-label col-auto pl-0 pr-0">Cao:</label>
-                                                            <div class="col pl-0 pr-0">
-                                                                <input type="text" id="ChieuCao" name="ChieuCao" class="form-control" />
+                                                            <label for="ChieuCao" class="col-form-label col-auto">Cao:</label>
+                                                            <div class="col-50">
+                                                                <input type="text" id="ChieuCao" name="ChieuCao" class="form-control" value="@Model.ThongTinHanhChinh.chieucao" />
                                                             </div>
-                                                            <label for="ChieuCao" class="col-form-label col-auto pl-0">cm</label>
+                                                            <label for="ChieuCao" class="col-form-label col-auto">cm</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-2">
+                                                    <div class="col-155">
                                                         <div class="form-group row">
-                                                            <label for="CanNang" class="col-form-label col-auto pl-0 pr-0">Cân nặng:</label>
-                                                            <div class="col pl-0 pr-0">
-                                                                <input type="text" id="CanNang" name="CanNang" class="form-control" />
+                                                            <label for="CanNang" class="col-form-label col-auto">Cân nặng:</label>
+                                                            <div class="col-50">
+                                                                <input type="text" id="CanNang" name="CanNang" class="form-control" value="@Model.ThongTinHanhChinh.cannang" />
                                                             </div>
-                                                            <label for="CanNang" class="col-form-label col-auto pl-0">kg</label>
+                                                            <label for="CanNang" class="col-form-label col-auto">kg</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-1">
+                                                    <div class="col-100">
                                                         <div class="form-group row">
-                                                            <label for="BMI" class="col-form-label col-auto pl-0 pr-0">BMI:</label>
-                                                            <div class="col pl-0 pr-0">
-                                                                <input type="text" id="BMI" name="BMI" class="form-control" />
+                                                            <label for="BMI" class="col-form-label col-auto">BMI:</label>
+                                                            <div class="col-50">
+                                                                <input type="text" id="BMI" name="BMI" class="form-control" value="@Model.ThongTinHanhChinh.bmi" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -213,13 +259,13 @@
                                                 <div class="row-cols-12">
                                                     <div class="form-group">
                                                         <label for="lyDoKham">Lý do đến khám</label>
-                                                        <textarea class="form-control" id="lyDoKham" name="lyDoKham" rows="3"></textarea>
+                                                        <textarea class="form-control" id="lyDoKham" name="lyDoKham" rows="3">@Model.ThongTinHanhChinh.lydo</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row-cols-12">
                                                     <div class="form-group">
                                                         <label for="benhSu">1. Bệnh sử</label>
-                                                        <textarea class="form-control" id="benhSu" name="benhSu" rows="3"></textarea>
+                                                        <textarea class="form-control" id="benhSu" name="benhSu" rows="3">@Model.ThongTinHanhChinh.benhsu</textarea>
                                                     </div>
                                                 </div>
 
@@ -231,11 +277,11 @@
                                                         <div class="form-group row">
                                                             <label class="col-form-label col-auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus; Thời gian khởi phát:</label>
                                                             <div class="col-2">
-                                                                <input type="text" id="ThangKP" name="ThangKP" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#ThangKP" />
+                                                                <input type="text" id="ThangKP" name="ThangKP" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#ThangKP" value="@Model.ThongTinHanhChinh.thangkhoiphat" />
                                                             </div>
                                                             <label class="col-form-label col-auto">tháng</label>
                                                             <div class="col-2">
-                                                                <input type="text" id="NamKP" name="NamKP" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#NamKP" />
+                                                                <input type="text" id="NamKP" name="NamKP" class="form-control datetimepicker-input" data-toggle="datetimepicker" data-target="#NamKP" value="@Model.ThongTinHanhChinh.namkhoiphat" />
                                                             </div>
                                                             <label class="col-form-label col-auto">năm</label>
                                                         </div>
@@ -244,7 +290,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-form-label col-auto">&minus; Tiền sử:</label>
                                                             <div class="col">
-                                                                <input type="text" id="TienSu" name="TienSu" class="form-control" />
+                                                                <input type="text" id="TienSu" name="TienSu" class="form-control" value="@Model.ThongTinHanhChinh.tiensu_chitiet" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -417,7 +463,7 @@
                                                 <div class="form-group row mt-3">
                                                     <label class="col-form-label col-auto ml-2">&minus; Chẩn đoán trước đó:</label>
                                                     <div class="col">
-                                                        <input type="text" id="ChanDoan" name="ChanDoan" class="form-control" />
+                                                        <input type="text" id="ChanDoan" name="ChanDoan" class="form-control" value="@Model.ThongTinHanhChinh.tiensu_chandoantruoc" />
                                                     </div>
                                                 </div>
 
@@ -515,14 +561,14 @@
                                                     <div class="row">
                                                         <label for="ThuocKhac" class="col-12">Tiền sử dị ứng, kháng thuốc, TDKMM gặp phải với mỗi thuốc trên: </label>
                                                         <div class="col-12">
-                                                            <input type="text" id="ThuocKhac" name="ThuocKhac" class="form-control" />
+                                                            <input type="text" id="ThuocKhac" name="ThuocKhac" class="form-control" value="@Model.ThongTinHanhChinh.tiensu_diungthuoc" />
                                                         </div>
                                                     </div>
                                                 </fieldset>
-                                                <div class="row">
-                                                    <label for="GiaDinh" class="col-12">2.2 Gia đình: </label>
-                                                    <div class="col-12">
-                                                        <input type="text" id="GiaDinh" name="GiaDinh" class="form-control" />
+                                                <div class="row pt-2">
+                                                    <label for="GiaDinh" class="col-150">2.2 Gia đình: </label>
+                                                    <div class="col">
+                                                        <input type="text" id="GiaDinh" name="GiaDinh" class="form-control" value="@Model.ThongTinHanhChinh.tiensu_giadinh" />
                                                     </div>
                                                 </div>
                                                 <!-- #end Thuốc điều trị -->
@@ -531,11 +577,11 @@
                                                     <label class="col-form-label col-12"><strong>Khám lâm sàng</strong></label>
                                                     <div class="col-6">
                                                         <label class="col-form-label col-12">1. Toàn thân</label>
-                                                        <textarea class="form-control col" rows="3"></textarea>
+                                                        <textarea class="form-control col" rows="3">@Model.ThongTinHanhChinh.KhamLS_toanthan</textarea>
                                                     </div>
                                                     <div class="col-6">
                                                         <label class="col-form-label col-12">2. Các bộ phận</label>
-                                                        <textarea class="form-control col" rows="3"></textarea>
+                                                        <textarea class="form-control col" rows="3">@Model.ThongTinHanhChinh.KhamLS_bophan</textarea>
                                                     </div>
                                                 </div>
 
@@ -705,7 +751,7 @@
                                                     <div class="row">
                                                         <label for="KhacNgoaiKhopTCLSTK" class="col-12">2.2 Liên quan đến bệnh lý mắc kèm </label>
                                                         <div class="col">
-                                                            <textarea class="form-control" rows="3"></textarea>
+                                                            <textarea class="form-control" rows="3">@Model.ThongTinHanhChinh.KhamLS_LienQuanBL</textarea>
                                                         </div>
                                                     </div>
                                                 </fieldset>
@@ -763,7 +809,7 @@
                                                         <div class="col-10">
                                                             <div class="row">
                                                                 <select class="form-control col mr-5 selectICD" id="BenhChinh" name="BenhChinh"></select>
-                                                                <input type="hidden" id="selectICD_Chinh" name="selectICD_Chinh" value="001" />
+                                                                <input type="hidden" id="selectICD_Chinh" name="selectICD_Chinh" value="@Model.ThongTinHanhChinh.BenhChinh_MaICD" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -806,7 +852,7 @@
 </div>
 
 @section Scripts{
-    <script src="libs/select2-4.0.2-rc.1/dist/js/i18n/<here-goes-language>.js"></script>
+    <script src="~/lib/select2/js/i18n/vi.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#ngayKham').datetimepicker({ format: 'DD/MM/YYYY', locale: 'vi' });
@@ -871,7 +917,7 @@
                 url: '/DanhMuc/GetBacSi?mabs=' + mabs
             }).then(function (data) {
                 // create the option and append to Select2
-                if (data.data.ma == null || data.data.hoten == null) { var option = new Option(null, null, true, true); }
+                if (data.data.ma == null && data.data.hoten == null) { var option = new Option(null, null, true, true); }
                 else { var option = new Option(data.data.ma + '|' + data.data.hoten, data.data.ma, true, true); }
                 bacSiSelect.append(option).trigger('change');
                 // manually trigger the `select2:select` event
@@ -932,7 +978,7 @@
                 url: '/DanhMuc/GetDieuDuong?madd=' + madd
             }).then(function (data) {
                 // create the option and append to Select2
-                if (data.data.ma == null || data.data.hoten == null) { var option = new Option(null, null, true, true); }
+                if (data.data.ma == null && data.data.hoten == null) { var option = new Option(null, null, true, true); }
                 else { var option = new Option(data.data.ma + '|' + data.data.hoten, data.data.ma, true, true); }              
                 dieuDuongSelect.append(option).trigger('change');
                 // manually trigger the `select2:select` event
@@ -986,7 +1032,7 @@
                     return m;
                 }
             });
-            var dieuDuongSelect = $('#ChanDoanICD');
+            var chanDoanSelect = $('#ChanDoanICD');
             var icd10 = ((document.getElementById("selectedICD") || {}).value)
             $.ajax({
                 type: 'GET',
@@ -995,9 +1041,9 @@
                 // create the option and append to Select2
                 if (data.data.ma == null || data.data.hoten == null) { var option = new Option(null, null, true, true); }
                 else { var option = new Option(data.data.cicD10 + '|' + data.data.vviet, data.data.cicD10, true, true); }
-                dieuDuongSelect.append(option).trigger('change');
+                chanDoanSelect.append(option).trigger('change');
                 // manually trigger the `select2:select` event
-                dieuDuongSelect.trigger({
+                chanDoanSelect.trigger({
                     type: 'select2:select',
                     params: {
                         data: data
